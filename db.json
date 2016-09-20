@@ -25,7 +25,7 @@
         },
         "columns": [
             {
-                "filed": "NO",
+                "field": "NO",
                 "displayName": "编号",
                 "isKey": true,
                 "isLinkUrl": true,
@@ -38,7 +38,7 @@
                 "controlBasicInfo": {}
             },
             {
-                "filed": "NAME",
+                "field": "NAME",
                 "displayName": "名称",
                 "isKey": false,
                 "isLinkUrl": false,
@@ -50,7 +50,7 @@
                 "controlBasicInfo": {}
             },
             {
-                "filed": "TYPE",
+                "field": "TYPE",
                 "displayName": "类型",
                 "isKey": false,
                 "isLinkUrl": false,
@@ -80,7 +80,7 @@
                 }
             },
             {
-                "filed": "STATUS",
+                "field": "STATUS",
                 "displayName": "状态",
                 "isKey": false,
                 "isLinkUrl": false,

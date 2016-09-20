@@ -6,6 +6,7 @@ import CoreTable from '../CoreTable/CoreTable';
 
 import tableConfig from '../../../db.json';
 
+// console.log(tableConfig);
 
 
 const App = React.createClass({
@@ -56,25 +57,13 @@ const App = React.createClass({
 
         return (<div>
 
-            <CoreTable config={tableConfig} />
+            <CoreTable config={tableConfig.coreTable}  />
 
             {this.props.children}
+        </div>
 
-            {//<div>   {this.state.name + " ---test"}</div>}
-                { // <div>
-                    // <ul>
-                    //     <li><IndexLink to="/" activeClassName="active">Home</IndexLink></li>
-                    //     {// <li><Link to="/datatable" activeStyle={{ color: 'green' }} >DataTable</Link></li>
-                    //     // <li><Link to="/myform" activeStyle={{ fontSize: '24px' }}>My Form</Link></li>
-                    //     }
-                    // </ul>
 
-                    // <input type="text"  />
-                    // </div>
-                }
-
-    
-        </div>);
+        );
     },
 });
 

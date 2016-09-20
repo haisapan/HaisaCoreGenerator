@@ -5,17 +5,22 @@ import CoreTableToolBar from './CoreTable.ToolBar/CoreTable.ToolBar';
 import CoreTableMainTable from './CoreTable.MainTable/CoreTable.MainTable';
 
 var CoreTable = (props) => {
+    console.log(props);
     return (
-        <div>
-            <CoreTableSearchBar></CoreTableSearchBar>
-            <hr/>
+        <div className="ui segment">
+            <CoreTableSearchBar fields={props.config.columns}></CoreTableSearchBar>
+         <div className="dividing"></div>
             <div>
-                <CoreTableToolBar></CoreTableToolBar>
-                <CoreTableMainTable></CoreTableMainTable>
+                <CoreTableToolBar {...props}></CoreTableToolBar>
+                <CoreTableMainTable {...props}></CoreTableMainTable>
             </div>
         </div>
     )
 };
+
+CoreTable.propTypes={
+    config: React.PropTypes.object.isRequired
+}
 
 
 
