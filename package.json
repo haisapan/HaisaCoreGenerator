@@ -1,5 +1,5 @@
 {
-  "name": "haisa-react-starter",
+  "name": "haisa-core-generator",
   "version": "0.0.1",
   "scripts": {
     "dev": "webpack-dev-server --devtool  --progress --colors --history-api-fallback  --content-base  ."

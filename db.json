@@ -1,0 +1,32 @@
+{
+    "coreTable": {
+        "name": "coreTable",
+        "title": "cool table generated",
+        "enableQuery": true,
+        "queryUrl":"http://localhost:3001/coretable",
+        "enableAdd": true,
+        "addUrl":"http://localhost:3001/coretable",
+        "enableEdit": true,
+        "editUrl":"http://localhost:3001/coretable",
+        "enableDelete": true,
+        "deleteUrl":"http://localhost:3001/coretable",
+        "autoHeight": true,
+        "height": 500,
+        "autoWidth": true,
+        "width": 800,
+        "hasChildTable": true,
+        "childTableComponentName":"coreChildTable",
+        "toolbar": {
+            "otherButtons": [
+                {
+                    "name": "publish"
+                }
+            ]
+        },
+        "columns": [
+            {
+                
+            }
+        ]
+    }
+}
