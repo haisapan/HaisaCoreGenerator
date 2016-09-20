@@ -1,21 +1,21 @@
 {
     "coreTable": {
         "name": "coreTable",
-        "title": "cool table generated",
+        "title": "cool table generated ",
         "enableQuery": true,
-        "queryUrl":"http://localhost:3001/coretable",
+        "queryUrl": "http://localhost:3001/coretable",
         "enableAdd": true,
-        "addUrl":"http://localhost:3001/coretable",
+        "addUrl": "http://localhost:3001/coretable",
         "enableEdit": true,
-        "editUrl":"http://localhost:3001/coretable",
+        "editUrl": "http://localhost:3001/coretable",
         "enableDelete": true,
-        "deleteUrl":"http://localhost:3001/coretable",
+        "deleteUrl": "http://localhost:3001/coretable",
         "autoHeight": true,
         "height": 500,
         "autoWidth": true,
         "width": 800,
         "hasChildTable": true,
-        "childTableComponentName":"coreChildTable",
+        "childTableComponentName": "coreChildTable",
         "toolbar": {
             "otherButtons": [
                 {
@@ -25,7 +25,73 @@
         },
         "columns": [
             {
-                
+                "filed": "NO",
+                "displayName": "编号",
+                "isKey": true,
+                "isLinkUrl": true,
+                "LinkUrl": "_self",
+                "isRefKey": false,
+                "hide": false,
+                "canQuery": true,
+                "canEdit": false,
+                "controlType": "number",
+                "controlBasicInfo": {}
+            },
+            {
+                "filed": "NAME",
+                "displayName": "名称",
+                "isKey": false,
+                "isLinkUrl": false,
+                "isRefKey": false,
+                "hide": false,
+                "canQuery": true,
+                "canEdit": false,
+                "controlType": "text",
+                "controlBasicInfo": {}
+            },
+            {
+                "filed": "TYPE",
+                "displayName": "类型",
+                "isKey": false,
+                "isLinkUrl": false,
+                "isRefKey": false,
+                "hide": false,
+                "canQuery": true,
+                "canEdit": false,
+                "controlType": "select",
+                "controlBasicInfo": {
+                    "items": [
+                        {
+                            "value": "cool",
+                            "name": "好",
+                            "desc": "it's great"
+                        },
+                        {
+                            "value": "notSoCool",
+                            "name": "没那么好",
+                            "desc": "it's not very great"
+                        },
+                        {
+                            "value": "bad",
+                            "name": "不好",
+                            "desc": "it's bad"
+                        }
+                    ]
+                }
+            },
+            {
+                "filed": "STATUS",
+                "displayName": "状态",
+                "isKey": false,
+                "isLinkUrl": false,
+                "isRefKey": false,
+                "hide": false,
+                "canQuery": true,
+                "canEdit": false,
+                "controlType": "select",
+                "controlBasicInfo": {
+                    "dataUrl": "http://localhost:3001/getAllStatus"
+                }
             }
         ]
     }

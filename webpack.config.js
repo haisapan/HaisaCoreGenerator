@@ -43,6 +43,14 @@ module.exports = {
         //   presets: ['es2015', 'react', 'stage-0'],
         // },
       },
+      {
+        test: /\.json$/,
+        exclude: /node_modules/,
+        loaders: ['json'],
+        // query: {
+        //   presets: ['es2015', 'react', 'stage-0'],
+        // },
+      },
     ],
   },
   // devServer 則是 webpack-dev-server 設定
