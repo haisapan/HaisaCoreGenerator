@@ -9,9 +9,10 @@ var CoreTable = (props) => {
     return (
         <div className="ui segment">
             <CoreTableSearchBar fields={props.config.columns}></CoreTableSearchBar>
-         <div className="dividing"></div>
-            <div>
+       
+            <div className="ui segment">
                 <CoreTableToolBar {...props}></CoreTableToolBar>
+                  <div className="ui divider"></div>
                 <CoreTableMainTable {...props}></CoreTableMainTable>
             </div>
         </div>
