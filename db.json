@@ -2,6 +2,8 @@
     "coreTable": {
         "name": "coreTable",
         "title": "cool table generated ",
+        "selectable": true,
+        "singleSelect": true,
         "enableQuery": true,
         "queryUrl": "http://localhost:3001/coretable",
         "enableAdd": true,

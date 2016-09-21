@@ -7,19 +7,20 @@ import CoreTableMainTable from './CoreTable.MainTable/CoreTable.MainTable';
 var CoreTable = (props) => {
     console.log(props);
     return (
-        <div className="ui segment">
+        <div className="ui segment core-table ">
             <CoreTableSearchBar fields={props.config.columns}></CoreTableSearchBar>
-       
+
             <div className="ui segment">
                 <CoreTableToolBar {...props}></CoreTableToolBar>
-                  <div className="ui divider"></div>
-                <CoreTableMainTable columns={props.config.columns} dataSource="url"></CoreTableMainTable>
+                <div className="ui divider"></div>
+
+                <CoreTableMainTable {...props.config} columns={props.config.columns} dataSourceUrl="url"></CoreTableMainTable>
             </div>
         </div>
     )
 };
 
-CoreTable.propTypes={
+CoreTable.propTypes = {
     config: React.PropTypes.object.isRequired
 }
 
