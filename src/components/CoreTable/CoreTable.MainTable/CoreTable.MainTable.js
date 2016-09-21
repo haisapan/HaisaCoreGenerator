@@ -10,7 +10,7 @@ class CoreTableMainTable extends React.Component {
         this.state = {
             currentPage: 1,
             currentPageSize: 10,
-            dataCount: 40
+            // dataCount: 40
         };
 
         /**
@@ -47,8 +47,8 @@ class CoreTableMainTable extends React.Component {
     //    changeCurrentPage=(page)=>this.changeCurrentPage(page);
 
     render() {
-
-        var pages = (this.state.dataCount / this.state.currentPageSize) || 1;  //总计页数
+        console.log(this.props.data);
+        var pages = _.ceil(this.props.data.length / this.state.currentPageSize) || 1;  //总计页数
         console.log(pages);
 
         /**Pagination Items */
@@ -67,7 +67,7 @@ class CoreTableMainTable extends React.Component {
         _.forEach(this.props.data, (row) => {
             var dataColumnsInRow = [];
             for (var i = 0; i < this.props.columns.length; i++) {
-                dataColumnsInRow.push(<td key={row[this.props.columns[i].field]+i}>{row[this.props.columns[i].field]}</td>);
+                dataColumnsInRow.push(<td key={row[this.props.columns[i].field] + i}>{row[this.props.columns[i].field]}</td>);
             }
             var dataRow = <tr>
                 <td key={row} style={{ width: 16 }}>
@@ -108,7 +108,7 @@ class CoreTableMainTable extends React.Component {
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th colSpan={this.props.selectable && this.props.singleSelect ?this.props.columns.length+1: this.props.columns.length}>
+                            <th colSpan={this.props.selectable && this.props.singleSelect ? this.props.columns.length + 1 : this.props.columns.length}>
                                 <div className="ui right floated pagination menu">
                                     <a className="icon item">
                                         <i className="left chevron icon"></i>
