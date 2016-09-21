@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import classNames from 'classNames'
+import classNames from 'classNames';
+import _ from 'lodash';
 // import $ from 'jquery';
 
 class CoreTableMainTable extends React.Component {
@@ -50,15 +51,32 @@ class CoreTableMainTable extends React.Component {
         var pages = (this.state.dataCount / this.state.currentPageSize) || 1;  //总计页数
         console.log(pages);
 
+        /**Pagination Items */
         var paginationItems = [];
-        {
-            for (let i = 1; i <= pages; i++) {
-                paginationItems.push(
-                    <a key={i} className={classNames("item", { "active": this.state.currentPage == i }) }  onClick={this.changeCurrentPage.bind(this, i) }>
-                        {i}</a>);
-            }
 
+        for (let i = 1; i <= pages; i++) {
+            paginationItems.push(
+                <a key={i} className={classNames("item", { "active": this.state.currentPage == i }) }  onClick={this.changeCurrentPage.bind(this, i) }>
+                    {i}</a>
+            );
         }
+
+        /**Rows */
+        var dataRows = [];
+
+        _.forEach(this.props.data, (row) => {
+            var dataColumnsInRow = [];
+            for (var i = 0; i < this.props.columns.length; i++) {
+                dataColumnsInRow.push(<td key={row[this.props.columns[i].field]+i}>{row[this.props.columns[i].field]}</td>);
+            }
+            var dataRow = <tr>
+                <td key={row} style={{ width: 16 }}>
+                    <input type="checkbox"/>
+                </td>
+                {dataColumnsInRow}
+            </tr>;
+            dataRows.push(dataRow);
+        });
 
 
 
@@ -69,11 +87,11 @@ class CoreTableMainTable extends React.Component {
                     <thead>
 
                         <tr>
-                            {this.props.selectable&&this.props.singleSelect ?
+                            {this.props.selectable && this.props.singleSelect ?
                                 <th>
                                     <input type="checkbox"/>
                                 </th>
-                                : 
+                                :
                                 null
                             }
 
@@ -86,82 +104,18 @@ class CoreTableMainTable extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-
-                            {this.props.selectable&&this.props.singleSelect ?
-                                <td style={{width: 16}}>
-                                    <input type="checkbox"/>
-                                </td>
-                                : 
-                                null
-                            }
-                            <td>
-                                <div className="ui ribbon label">First</div>
-                            </td>
-                            <td>
-                                Cell
-                                <div className="ui input">
-                                    <input type="text"/>
-                                </div>
-
-                            </td>
-                            <td>Cell</td>
-                        </tr>
-                        <tr>
-                          {this.props.selectable&&this.props.singleSelect ?
-                                <td style={{width: 16}}>
-                                    <input type="checkbox"/>
-                                </td>
-                                : 
-                                null
-                            }
-                            <td>Cell</td>
-                            <td>Cell</td>
-                            <td>Cell</td>
-                        </tr>
-                        <tr className="positive">
-                          {this.props.selectable&&this.props.singleSelect ?
-                                <td style={{width: 16}}>
-                                    <input type="checkbox"/>
-                                </td>
-                                : 
-                                null
-                            }
-                            <td>Cell</td>
-                            <td>Cell</td>
-                            <td>Cell</td>
-                        </tr>
+                        {dataRows}
                     </tbody>
                     <tfoot>
                         <tr>
-
-                            <th colSpan="3">
-
+                            <th colSpan={this.props.selectable && this.props.singleSelect ?this.props.columns.length+1: this.props.columns.length}>
                                 <div className="ui right floated pagination menu">
-
-
                                     <a className="icon item">
                                         <i className="left chevron icon"></i>
                                     </a>
-                                    {
-                                        // console.log("test")
-                                        paginationItems
-                                    }
+                                    { paginationItems }
 
 
-                                    {
-                                        // <a className="item active">1</a>
-                                        // <a className={classNames("item", { "active": this.state.currentPage==2})}  onClick={this.changeCurrentPage.bind(this,2)}>2</a>
-                                        // <a className="item">...</a>
-                                        // <a className="item">
-                                        //     <div className="ui input" style={{ width: 48, height:25 }}>
-                                        //         <input type="text"/>
-                                        //     </div>
-
-                                        // </a>
-                                        // <a className="item">3</a>
-                                        // <a className="item">4</a>
-                                    }
                                     <a className="icon item">
                                         <i className="right chevron icon"></i>
                                     </a>

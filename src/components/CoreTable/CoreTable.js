@@ -14,7 +14,7 @@ var CoreTable = (props) => {
                 <CoreTableToolBar {...props}></CoreTableToolBar>
                 <div className="ui divider"></div>
 
-                <CoreTableMainTable {...props.config} columns={props.config.columns} dataSourceUrl="url"></CoreTableMainTable>
+                <CoreTableMainTable {...props.config} columns={props.config.columns} dataSourceUrl="url" data={props.config.data}></CoreTableMainTable>
             </div>
         </div>
     )

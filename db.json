@@ -95,6 +95,27 @@
                     "dataUrl": "http://localhost:3001/getAllStatus"
                 }
             }
+        ],
+        "data":[
+            {
+                "NO": "001",
+                "NAME": "test1",
+                "TYPE": "cool",
+                "STATUS": "Opened"
+            },
+            {
+                "NO": "002",
+                "NAME": "test2",
+                "TYPE": "notSoCool",
+                "STATUS": "InProgress"
+            },
+            {
+                "NO": "003",
+                "NAME": "test3",
+                "TYPE": "bad",
+                "STATUS": "Closed"
+            }
+
         ]
     }
 }
