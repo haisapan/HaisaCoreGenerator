@@ -12,6 +12,7 @@ const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
 module.exports = {
   // 檔案起始點從 entry 進入，因為是陣列所以也可以是多個檔案
   entry: [
+    // "babel-polyfill",
     //    'webpack-dev-server/client?http://localhost:8008',
     // 'webpack/hot/only-dev-server',
     './src/index.js',

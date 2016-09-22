@@ -1,6 +1,5 @@
 // import {DataTable } from 'antd/lib/';
 // import 'antd/dist/antd.css'; 
-
 import { Table, Icon } from 'antd';
 
 const columns = [{
