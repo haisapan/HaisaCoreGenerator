@@ -1,3 +1,22 @@
+
+.core-table{
+    /*background: #ECECEC !important;*/
+} 
 .core-table .ui.selection.dropdown{
     min-width: initial;
+}
+.button-group{
+    margin: 0 10px;
+}
+.button-group button{
+    margin: 0 10px;
+}
+
+.toolbar{
+    /*background: #ECECEC !important;*/
+    padding: 3px;
+}
+
+.core-table .main-table{
+     /*background: #ECECEC !important;*/
 }

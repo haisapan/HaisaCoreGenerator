@@ -1,98 +1,98 @@
-const React = require('react');
-const {Table, Column, Cell} = require('fixed-data-table');
+// import {DataTable } from 'antd/lib/';
+// import 'antd/dist/antd.css'; 
+import { Table, Icon } from 'antd';
+import CoreDataTable_SearchBar from './CoreDataTable_SearchBar/CoreDataTable_SearchBar';
+import CoreDataTable_ToolBar from './CoreDataTable_ToolBar/CoreDataTable_ToolBar';
+import CoreDataTable_MainTable from './CoreDataTable_MainTable/CoreDataTable_MainTable';
 
-class MyTextCell extends React.Component {
+// const columns = [{
+//   title: '姓名',
+//   dataIndex: 'name',
+//   key: 'name',
+//   width: '40%',
+// }, {
+//   title: '年龄',
+//   dataIndex: 'age',
+//   key: 'age',
+//   width: '30%',
+// }, {
+//   title: '住址',
+//   dataIndex: 'address',
+//   key: 'address',
+//   width: '30%',
+// }];
+
+// const data = [{
+//   key: 1,
+//   name: 'a',
+//   age: 32,
+//   address: '我是a',
+//   children: [{
+//     key: 11,
+//     name: 'aa',
+//     age: 33,
+//     address: '我是aa',
+//   }, {
+//     key: 12,
+//     name: 'ab',
+//     age: 33,
+//     address: '我是ab',
+//     children: [{
+//       key: 121,
+//       name: 'aba',
+//       age: 33,
+//       address: '我是aba',
+//     }],
+//   }, {
+//     key: 13,
+//     name: 'ac',
+//     age: 33,
+//     address: '我是ac',
+//     children: [{
+//       key: 131,
+//       name: 'aca',
+//       age: 33,
+//       address: '我是aca',
+//       children: [{
+//         key: 1311,
+//         name: 'acaa',
+//         age: 33,
+//         address: '我是acaa',
+//       }, {
+//         key: 1312,
+//         name: 'acab',
+//         age: 33,
+//         address: '我是acab',
+//       }],
+//     }],
+//   }],
+// }, {
+//   key: 2,
+//   name: 'b',
+//   age: 32,
+//   address: '我是b',
+// }];
+
+import React, {Component, PropTypes} from 'react';
+
+class CoreDataTable extends Component {
     render() {
-        const {rowIndex, field, data, ...props} = this.props;
+        // console.log(this.props.config.columns)
         return (
-            <Cell {...props}>
-                {data[rowIndex][field]}
-            </Cell>
+            <div className="core-table">
+               <CoreDataTable_SearchBar columns={this.props.config.columns}></CoreDataTable_SearchBar>
+            
+               <CoreDataTable_ToolBar ></CoreDataTable_ToolBar>
+               <CoreDataTable_MainTable></CoreDataTable_MainTable>
+            </div>
         );
     }
 }
 
-class MyLinkCell extends React.Component {
-    render() {
-        const {rowIndex, field, data, ...props} = this.props;
-        const link = data[rowIndex][field];
-        return (
-            <Cell {...props}>
-                <a href={link}>{link}</a>
-            </Cell>
-        );
-    }
-}
+CoreDataTable.propTypes = {
 
-class MyEditCell extends React.Component {
-    render() {
-        const {rowIndex, field, data, ...props} = this.props;
-        const defaultValue = data[rowIndex][field];
-        return (
-            <Cell {...props}>
-                <input type="text" defaultValue={defaultValue} />
-            </Cell>
-        );
-    }
-}
+};
 
-class MyTable extends React.Component {
-    constructor(props) {
-        super(props);
+export default CoreDataTable;
 
-        this.state = {
-            myTableData: [
-                { name: 'Rylan', email: 'Angelita_Weimann42@gmail.com' },
-                { name: 'Amelia', email: 'Dexter.Trantow57@hotmail.com' },
-                { name: 'Estevan', email: 'Aimee7@hotmail.com' },
-                { name: 'Florence', email: 'Jarrod.Bernier13@yahoo.com' },
-                { name: 'Tressa', email: 'Yadira1@hotmail.com' },
-            ],
-        };
-    }
-
-    render() {
-        return (
-            <Table
-                rowsCount={this.state.myTableData.length}
-                rowHeight={50}
-                headerHeight={50}
-                width={1000}
-                height={500}>
-                <Column
-                    header={<Cell>Name</Cell>}
-                    cell={
-                        <MyTextCell
-                            data={this.state.myTableData}
-                            field="name"
-                            />
-                    }
-                    width={200}
-                    />
-                <Column
-                    header={<Cell>Email</Cell>}
-                    cell={
-                        <MyLinkCell
-                            data={this.state.myTableData}
-                            field="email"
-                            />
-                    }
-                    width={200}
-                    />
-                    <Column
-                    header={<Cell>Email</Cell>}
-                    cell={
-                        <MyEditCell
-                            data={this.state.myTableData}
-                            field="email"
-                            />
-                    }
-                    width={200}
-                    />
-                
-            </Table>
-        );
-    }
-}
-
-export default MyTable;
+// ReactDOM.render(<Table columns={columns} dataSource={data} />, mountNode);

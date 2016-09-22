@@ -51,6 +51,18 @@
                 "controlType": "text",
                 "controlBasicInfo": {}
             },
+             {
+                "field": "StartTime",
+                "displayName": "开始时间",
+                "isKey": false,
+                "isLinkUrl": false,
+                "isRefKey": false,
+                "hide": false,
+                "canQuery": true,
+                "canEdit": false,
+                "controlType": "datepicker",
+                "controlBasicInfo": {}
+            },
             {
                 "field": "TYPE",
                 "displayName": "类型",

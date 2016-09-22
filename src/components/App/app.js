@@ -2,13 +2,9 @@ import React from 'react';
 import ReactDOM from "react-dom";
 import { Link, IndexLink } from 'react-router';
 
-import CoreTable from '../CoreTable/CoreTable';
-import CoolDataTable from '../CoolDataTable/CoolDataTable';
+import CoreDataTable from '../CoreDataTable/CoreDataTable';
 
 import tableConfig from '../../../db.json';
-
-// console.log(tableConfig);
-
 
 const App = React.createClass({
     getInitialState() {
@@ -57,11 +53,7 @@ const App = React.createClass({
     render() {
 
         return (<div>
-
-            {
-                // <CoreTable config={tableConfig.coreTable}  />
-            }
-<CoolDataTable></CoolDataTable>
+            <CoreDataTable config={tableConfig.coreTable}></CoreDataTable>
             {this.props.children}
         </div>
 

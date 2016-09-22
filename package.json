@@ -17,9 +17,11 @@
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
     "react-router": "^2.8.1",
+    "reqwest": "^2.0.5",
     "semantic-ui": "^2.2.4",
     "webpack": "^1.13.2",
-    "webpack-dev-server": "^1.16.0"
+    "webpack-dev-server": "^1.16.0",
+    "whatwg-fetch": "^1.0.0"
   },
   "devDependencies": {
     "babel-browser": "^6.1.19",
