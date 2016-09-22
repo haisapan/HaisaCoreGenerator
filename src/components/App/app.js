@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { Link, IndexLink } from 'react-router';
 
 import CoreTable from '../CoreTable/CoreTable';
+import CoolDataTable from '../CoolDataTable/CoolDataTable';
 
 import tableConfig from '../../../db.json';
 
@@ -57,8 +58,10 @@ const App = React.createClass({
 
         return (<div>
 
-            <CoreTable config={tableConfig.coreTable}  />
-
+            {
+                // <CoreTable config={tableConfig.coreTable}  />
+            }
+<CoolDataTable></CoolDataTable>
             {this.props.children}
         </div>
 
