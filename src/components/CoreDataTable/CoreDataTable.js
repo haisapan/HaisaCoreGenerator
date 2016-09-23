@@ -1,7 +1,7 @@
 // import {DataTable } from 'antd/lib/';
 // import 'antd/dist/antd.css'; 
 import React, {Component, PropTypes} from 'react';
-import { Form, Table, Icon } from 'antd';
+import { Form, Table, Icon, Card, Row } from 'antd';
 import CoreDataTable_SearchBar from './CoreDataTable_SearchBar/CoreDataTable_SearchBar';
 import CoreDataTable_ToolBar from './CoreDataTable_ToolBar/CoreDataTable_ToolBar';
 import CoreDataTable_MainTable from './CoreDataTable_MainTable/CoreDataTable_MainTable';
@@ -94,10 +94,17 @@ class CoreDataTable extends Component {
  
         return (
             <div className="core-table">
-               <CoreDataTable_SearchBarForm columns={this.props.config.columns} filterTable={this.filterTable}></CoreDataTable_SearchBarForm>
-            
-               <CoreDataTable_ToolBar ></CoreDataTable_ToolBar>
+            <Row>
+               <Card   span="20">
+              <Card>
+                <CoreDataTable_SearchBarForm columns={this.props.config.columns} filterTable={this.filterTable}></CoreDataTable_SearchBarForm>
+              </Card>
+          
+               {//<CoreDataTable_ToolBar ></CoreDataTable_ToolBar>
+                   }
                <CoreDataTable_MainTable></CoreDataTable_MainTable>
+               </Card>
+               </Row>
             </div>
         );
     }

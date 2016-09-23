@@ -8,15 +8,16 @@ const columns = [{
     dataIndex: 'name',
     sorter: true,
     render: name => `${name.first} ${name.last}`,
-    width: '20%',
+    // width: '20%',
 }, {
         title: '性别',
         dataIndex: 'gender',
-        filters: [
-            { text: 'Male', value: 'male' },
-            { text: 'Female', value: 'female' },
-        ],
-        width: '20%',
+         sorter: true,
+        // filters: [
+        //     { text: 'Male', value: 'male' },
+        //     { text: 'Female', value: 'female' },
+        // ],
+        // width: '20%',
     }, {
         title: '邮箱',
         dataIndex: 'email',

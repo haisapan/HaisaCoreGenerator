@@ -6,8 +6,8 @@ class CoreDataTable_SearchBar extends Component {
 
     constructor(props) {
         super(props);
+        /**Bind the method to this */
         this.componentDidMount = this.componentDidMount.bind(this);
-        this.InputChange = this.InputChange.bind(this);
         this.formSubmit = this.formSubmit.bind(this);
     };
 
@@ -15,13 +15,13 @@ class CoreDataTable_SearchBar extends Component {
         console.log("mount")
         console.log(this.props)
     };
-    InputChange(e) {
-        console.log(e);
-        console.log(this.props);
-    };
     formSubmit(e) {
         e.preventDefault();
         console.log('收到表单值：', this.props.form.getFieldsValue());
+    };
+
+    createCompententType(field){
+
     };
 
     render() {
@@ -46,7 +46,7 @@ class CoreDataTable_SearchBar extends Component {
                             })
                         }
                         <Col span={12}  style={{ textAlign: 'left' }}>
-                            <Button type="primary" htmlType="submit" style={{ marginRight: '20px' }} onClick={this.props.filterTable}>搜索</Button>
+                            <Button type="primary" htmlType="submit" style={{ marginRight: '20px' }} >搜索</Button>
                             <Button>清除条件</Button>
                         </Col>
                     </Row>
