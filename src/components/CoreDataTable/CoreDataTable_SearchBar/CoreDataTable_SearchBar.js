@@ -20,7 +20,7 @@ class CoreDataTable_SearchBar extends Component {
         console.log('收到表单值：', this.props.form.getFieldsValue());
     };
 
-    createCompententType(field){
+    createCompententType(field) {
 
     };
 
@@ -28,7 +28,7 @@ class CoreDataTable_SearchBar extends Component {
         const { getFieldProps } = this.props.form;
         console.log(this.props.columns)
         return (
-            <div style={{ padding: '30px' }}>
+            <div style={{ padding: '0px' }}>
                 <Form horizontal className="ant-advanced-search-form" onSubmit={this.formSubmit}>
                     <Row>
                         {

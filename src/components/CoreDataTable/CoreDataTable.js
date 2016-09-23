@@ -78,36 +78,82 @@ import CoreDataTable_MainTable from './CoreDataTable_MainTable/CoreDataTable_Mai
 
 class CoreDataTable extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.filterTable=this.filterTable.bind(this);
-       
-    };
-
-    filterTable(params={}){
+        this.filterTable = this.filterTable.bind(this);
 
     };
 
-    render() {
+    handleTableChange(pagination, filters, sorter) {
+        const pager = this.state.pagination;
+        pager.current = pagination.current;
+        this.setState({
+            pagination: pager,
+        });
+        this.fetch({
+            results: pagination.pageSize,
+            page: pagination.current,
+            sortField: sorter.field,
+            sortOrder: sorter.order,
+            ...filters,
+    });
+    };
+    fetch(params = {}) {
+        console.log('请求参数：', params);
+        this.setState({ loading: true });
+        reqwest({
+            url: 'http://api.randomuser.me',
+            method: 'get',
+            data: {
+                results: 10,
+                ...params,
+            },
+            type: 'json',
+        })
+        .then(data => {
+        const pagination = this.state.pagination;
+        // Read total count from server
+        // pagination.total = data.totalCount;
+        pagination.total = 200;
+        this.setState({
+            loading: false,
+            data: data.results,
+            pagination,
+        });
+    });
+  };
+
+
+onSelectChange(selectedRowKeys) {
+    console.log('selectedRowKeys changed: ', selectedRowKeys);
+    this.setState({ selectedRowKeys });
+};
+
+
+filterTable(params = {}){
+
+};
+
+render() {
         
- var CoreDataTable_SearchBarForm = Form.create()(CoreDataTable_SearchBar);
- 
-        return (
-            <div className="core-table">
+    var CoreDataTable_SearchBarForm = Form.create()(CoreDataTable_SearchBar);
+
+    return (
+        <div className="core-table">
             <Row>
-               <Card   span="20">
-              <Card>
-                <CoreDataTable_SearchBarForm columns={this.props.config.columns} filterTable={this.filterTable}></CoreDataTable_SearchBarForm>
-              </Card>
-          
-               {//<CoreDataTable_ToolBar ></CoreDataTable_ToolBar>
-                   }
-               <CoreDataTable_MainTable></CoreDataTable_MainTable>
-               </Card>
-               </Row>
-            </div>
-        );
-    }
+                <Card   span="20">
+                    <Card>
+                        <CoreDataTable_SearchBarForm columns={this.props.config.columns} filterTable={this.filterTable}></CoreDataTable_SearchBarForm>
+                    </Card>
+
+                    {//<CoreDataTable_ToolBar ></CoreDataTable_ToolBar>
+                    }
+                    <CoreDataTable_MainTable></CoreDataTable_MainTable>
+                </Card>
+            </Row>
+        </div>
+    );
+}
 }
 
 CoreDataTable.propTypes = {
