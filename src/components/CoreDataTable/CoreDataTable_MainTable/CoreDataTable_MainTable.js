@@ -20,9 +20,9 @@ const columns = [{
     }, {
         title: '邮箱',
         dataIndex: 'email',
-        render: email=>{
-            return <Input type="text" defaultValue={email} />;
-        }
+        // render: email => {
+        //     return <Input type="text" defaultValue={email} style={{ maxWidth: 200 }}/>;
+        // }
     }];
 
 class CoreDataTable_MainTable extends Component {
@@ -62,7 +62,7 @@ fetch(params = {}) {
         method: 'get',
         data: {
             results: 10,
-        ...params,
+            ...params,
       },
 type: 'json',
     }).then(data => {
@@ -97,7 +97,7 @@ render() {
     return (
         <div>
             <h2>Main Table</h2>
-            <Table columns={columns}
+            <Table columns={columns} bordered={true}
                 rowKey={record => record.registered}
                 dataSource={this.state.data}
                 rowSelection={rowSelection}

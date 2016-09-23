@@ -8,9 +8,21 @@
 .button-group{
     margin: 0 10px;
 }
-.button-group button{
-    margin: 0 10px;
+.ant-btn{
+    margin: 5px !important;
 }
+.button-group button{
+    margin: 5px 10px;
+}
+
+.ant-form-item-label{
+    text-align: left;
+}
+
+.ant-form-item-label label{
+    margin-left:5px;
+}
+
 
 .toolbar{
     /*background: #ECECEC !important;*/
