@@ -1,6 +1,7 @@
 // import {DataTable } from 'antd/lib/';
 // import 'antd/dist/antd.css'; 
-import { Table, Icon } from 'antd';
+import React, {Component, PropTypes} from 'react';
+import { Form, Table, Icon } from 'antd';
 import CoreDataTable_SearchBar from './CoreDataTable_SearchBar/CoreDataTable_SearchBar';
 import CoreDataTable_ToolBar from './CoreDataTable_ToolBar/CoreDataTable_ToolBar';
 import CoreDataTable_MainTable from './CoreDataTable_MainTable/CoreDataTable_MainTable';
@@ -73,14 +74,27 @@ import CoreDataTable_MainTable from './CoreDataTable_MainTable/CoreDataTable_Mai
 //   address: '我是b',
 // }];
 
-import React, {Component, PropTypes} from 'react';
+
 
 class CoreDataTable extends Component {
+
+    constructor(props){
+        super(props);
+        this.filterTable=this.filterTable.bind(this);
+       
+    };
+
+    filterTable(params={}){
+
+    };
+
     render() {
-        // console.log(this.props.config.columns)
+        
+ var CoreDataTable_SearchBarForm = Form.create()(CoreDataTable_SearchBar);
+ 
         return (
             <div className="core-table">
-               <CoreDataTable_SearchBar columns={this.props.config.columns}></CoreDataTable_SearchBar>
+               <CoreDataTable_SearchBarForm columns={this.props.config.columns} filterTable={this.filterTable}></CoreDataTable_SearchBarForm>
             
                <CoreDataTable_ToolBar ></CoreDataTable_ToolBar>
                <CoreDataTable_MainTable></CoreDataTable_MainTable>

@@ -6,35 +6,52 @@ class CoreDataTable_SearchBar extends Component {
 
     constructor(props) {
         super(props);
+        this.componentDidMount = this.componentDidMount.bind(this);
+        this.InputChange = this.InputChange.bind(this);
+        this.formSubmit = this.formSubmit.bind(this);
+    };
 
+    componentDidMount() {
+        console.log("mount")
+        console.log(this.props)
+    };
+    InputChange(e) {
+        console.log(e);
+        console.log(this.props);
+    };
+    formSubmit(e) {
+        e.preventDefault();
+        console.log('收到表单值：', this.props.form.getFieldsValue());
     };
 
     render() {
+        const { getFieldProps } = this.props.form;
         console.log(this.props.columns)
         return (
             <div style={{ padding: '30px' }}>
-                <Form horizontal className="ant-advanced-search-form">
+                <Form horizontal className="ant-advanced-search-form" onSubmit={this.formSubmit}>
                     <Row>
                         {
                             this.props.columns.map((column) => {
-                                return <Col key={column.field} span={6} md={4} xs={12}>
-                                    <FormItem key={column.field}
-                                        label={column.displayName}
-                                        labelCol={{ span: 10 }}
-                                        wrapperCol={{ span: 14 }}
-                                        >
-                                        <Input placeholder={column.displayName} size="default"  />
-                                    </FormItem>
-                                </Col>
+                                return (
+                                    <Col key={column.field} span={6} md={4} xs={12}>
+                                        <FormItem key={column.field}
+                                            label={column.displayName}
+                                            labelCol={{ span: 10 }}
+                                            wrapperCol={{ span: 14 }}
+                                            >
+                                            <Input placeholder={column.displayName} size="default" {...getFieldProps(column.field, { initialValue: '' }) } />
+                                        </FormItem>
+                                    </Col>);
                             })
                         }
-<Col span={12}  style={{ textAlign: 'left' }}>
-                            <Button type="primary" htmlType="submit" style={{ marginRight: '20px' }}>搜索</Button>
+                        <Col span={12}  style={{ textAlign: 'left' }}>
+                            <Button type="primary" htmlType="submit" style={{ marginRight: '20px' }} onClick={this.props.filterTable}>搜索</Button>
                             <Button>清除条件</Button>
                         </Col>
                     </Row>
                     <Row>
-                        
+
                     </Row>
                 </Form>
             </div>

@@ -20,6 +20,7 @@ const columns = [{
     }, {
         title: '邮箱',
         dataIndex: 'email',
+        
         // render: email => {
         //     return <Input type="text" defaultValue={email} style={{ maxWidth: 200 }}/>;
         // }
