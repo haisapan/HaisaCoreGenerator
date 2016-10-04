@@ -13,8 +13,8 @@ module.exports = {
   // 檔案起始點從 entry 進入，因為是陣列所以也可以是多個檔案
   entry: [
     // "babel-polyfill",
-    //    'webpack-dev-server/client?http://localhost:8008',
-    // 'webpack/hot/only-dev-server',
+    'webpack-dev-server/client?http://localhost:8008',
+    'webpack/hot/only-dev-server',
     './src/index.js',
   ],
   // output 是放入產生出來的結果的相關參數
@@ -25,14 +25,12 @@ module.exports = {
   },
   module: {
 
-    preLoaders: [
-      {
-        test: /\.jsx$|\.js$/,
-        loader: 'eslint-loader',
-        include: `${__dirname}/src`,
-        exclude: /dist\.js$/
-      }
-    ],
+    preLoaders: [{
+      test: /\.jsx$|\.js$/,
+      loader: 'eslint-loader',
+      include: `${__dirname}/src`,
+      exclude: /dist\.js$/
+    }],
     // loaders 則是放欲使用的 loaders，在這邊是使用 babel-loader 將所有 .js（這邊用到正則式）相關檔案（排除了 npm 安裝的套件位置 node_modules）轉譯成瀏覽器可以閱讀的 JavaScript。preset 則是使用的 babel 轉譯規則，這邊使用 react、es2015
     loaders: [
 
@@ -43,14 +41,27 @@ module.exports = {
         // query: {
         //   presets: ['es2015', 'react', 'stage-0'],
         // },
-      },
-      {
+      }, {
         test: /\.json$/,
         exclude: /node_modules/,
         loaders: ['json'],
         // query: {
         //   presets: ['es2015', 'react', 'stage-0'],
         // },
+      }, {
+        test: /\.(png|jpg|gif)$/,
+        loader: 'url-loader?limit=8192'
+      }, {
+        test: /\.(ttf|eot|svg|woff)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: "file-loader"
+      },
+      // { test: /\.css$/, loader: 'style-loader!css-loader' },
+      {
+        test: /\.css$/,
+        loaders: [
+          'style?sourceMap',
+          'css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]'
+        ]
       },
     ],
   },

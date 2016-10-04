@@ -9,6 +9,7 @@ class CoreDataTable_SearchBar extends Component {
         /**Bind the method to this */
         this.componentDidMount = this.componentDidMount.bind(this);
         this.formSubmit = this.formSubmit.bind(this);
+        this.resetSearch=this.resetSearch.bind(this);
     };
 
     componentDidMount() {
@@ -18,6 +19,12 @@ class CoreDataTable_SearchBar extends Component {
     formSubmit(e) {
         e.preventDefault();
         console.log('收到表单值：', this.props.form.getFieldsValue());
+        var filterItems=this.props.form.getFieldsValue();
+        this.props.filterTable(null, filterItems, null);
+    };
+    resetSearch(e){
+        e.preventDefault();
+        this.props.form.resetFields();
     };
 
     createCompententType(field) {
@@ -47,7 +54,7 @@ class CoreDataTable_SearchBar extends Component {
                         }
                         <Col span={12}  style={{ textAlign: 'left' }}>
                             <Button type="primary" htmlType="submit" style={{ marginRight: '20px' }} >搜索</Button>
-                            <Button>清除条件</Button>
+                            <Button onClick={this.resetSearch}>清除条件</Button>
                         </Col>
                     </Row>
                     <Row>

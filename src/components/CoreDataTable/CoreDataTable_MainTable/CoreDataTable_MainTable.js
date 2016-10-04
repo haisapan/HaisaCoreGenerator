@@ -48,69 +48,40 @@ class CoreDataTable_MainTable extends Component {
         this.setState({
             pagination: pager,
         });
-        this.fetch({
-            results: pagination.pageSize,
-            page: pagination.current,
-            sortField: sorter.field,
-            sortOrder: sorter.order,
-            ...filters,
-    });
-};
-fetch(params = {}) {
-    console.log('请求参数：', params);
-    this.setState({ loading: true });
-    reqwest({
-        url: 'http://api.randomuser.me',
-        method: 'get',
-        data: {
-            results: 10,
-            ...params,
-      },
-type: 'json',
-    }).then(data => {
-    const pagination = this.state.pagination;
-    // Read total count from server
-    // pagination.total = data.totalCount;
-    pagination.total = 200;
-    this.setState({
-        loading: false,
-        data: data.results,
-        pagination,
-    });
-});
-  };
+        this.props.filterTable(pagination, filters, sorter);
 
-
-onSelectChange(selectedRowKeys) {
-    console.log('selectedRowKeys changed: ', selectedRowKeys);
-    this.setState({ selectedRowKeys });
-};
-
-
-componentDidMount() {
-    this.fetch();
-};
-
-render() {
-
-    const rowSelection = {
-        selectedRowKeys: this.state.selectedRowKeys,
-        onChange: this.onSelectChange,
     };
 
-    return (
-        <div>
-            <Table columns={columns} bordered={true}
-                rowKey={record => record.registered}
-                dataSource={this.state.data}
-                rowSelection={rowSelection}
-                pagination={this.state.pagination}
-                loading={this.state.loading}
-                onChange={this.handleTableChange}
-                />
-        </div>
-    );
-}
+    onSelectChange(selectedRowKeys) {
+        console.log('selectedRowKeys changed: ', selectedRowKeys);
+        this.setState({ selectedRowKeys });
+    };
+
+    componentDidMount() {
+        // this.fetch();
+        this.props.filterTable();
+    };
+
+    render() {
+
+        const rowSelection = {
+            selectedRowKeys: this.state.selectedRowKeys,
+            onChange: this.onSelectChange,
+        };
+
+        return (
+            <div>
+                <Table columns={columns} bordered={true}
+                    rowKey={record => record.registered}
+                    dataSource={this.state.data}
+                    rowSelection={rowSelection}
+                    pagination={this.state.pagination}
+                    loading={this.state.loading}
+                    onChange={this.handleTableChange}
+                    />
+            </div>
+        );
+    }
 }
 
 CoreDataTable_MainTable.propTypes = {
