@@ -53,7 +53,7 @@ const App = React.createClass({
     render() {
 
         return (<div>
-            <CoreDataTable config={tableConfig.coreTable}></CoreDataTable>
+                   <CoreDataTable config={tableConfig.coreTable}></CoreDataTable>
             {this.props.children}
         </div>
 

@@ -20,7 +20,7 @@ class CoreDataTable_SearchBar extends Component {
         e.preventDefault();
         console.log('收到表单值：', this.props.form.getFieldsValue());
         var filterItems=this.props.form.getFieldsValue();
-        this.props.filterTable(null, filterItems, null);
+        this.props.filterTable({}, filterItems, null);
     };
     resetSearch(e){
         e.preventDefault();
@@ -41,13 +41,13 @@ class CoreDataTable_SearchBar extends Component {
                         {
                             this.props.columns.map((column) => {
                                 return (
-                                    <Col key={column.field} span={6} md={4} xs={12}>
-                                        <FormItem key={column.field}
-                                            label={column.displayName}
+                                    <Col key={column.dataIndex} span={6} md={4} xs={12}>
+                                        <FormItem key={column.dataIndex}
+                                            label={column.title}
                                             labelCol={{ span: 10 }}
                                             wrapperCol={{ span: 14 }}
                                             >
-                                            <Input placeholder={column.displayName} size="default" {...getFieldProps(column.field, { initialValue: '' }) } />
+                                            <Input placeholder={column.title} size="default" {...getFieldProps(column.dataIndex, { initialValue: '' }) } />
                                         </FormItem>
                                     </Col>);
                             })

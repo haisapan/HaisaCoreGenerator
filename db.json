@@ -1,133 +1,132 @@
 {
-    "coreTable": {
-        "name": "coreTable",
-        "title": "cool table generated ",
-        "selectable": true,
-        "singleSelect": true,
-        "enableQuery": true,
-        "queryUrl": "http://localhost:3001/coretable",
-        "enableAdd": true,
-        "addUrl": "http://localhost:3001/coretable",
-        "enableEdit": true,
-        "editUrl": "http://localhost:3001/coretable",
-        "enableDelete": true,
-        "deleteUrl": "http://localhost:3001/coretable",
-        "autoHeight": true,
-        "height": 500,
-        "autoWidth": true,
-        "width": 800,
-        "hasChildTable": true,
-        "childTableComponentName": "coreChildTable",
-        "toolbar": {
-            "otherButtons": [
-                {
-                    "name": "publish"
-                }
-            ]
-        },
-        "columns": [
+  "coreTable": {
+    "name": "coreTable",
+    "title": "cool table generated ",
+    "selectable": true,
+    "singleSelect": true,
+    "enableQuery": true,
+    "queryUrl": "http://localhost:3000/data",
+    "enableAdd": true,
+    "addUrl": "http://localhost:3000/coretable",
+    "enableEdit": true,
+    "editUrl": "http://localhost:3000/coretable",
+    "enableDelete": true,
+    "deleteUrl": "http://localhost:3000/coretable",
+    "autoHeight": true,
+    "height": 500,
+    "autoWidth": true,
+    "width": 800,
+    "hasChildTable": true,
+    "childTableComponentName": "coreChildTable",
+    "toolbar": {
+      "otherButtons": [
+        {
+          "name": "publish"
+        }
+      ]
+    },
+    "columns": [
+      {
+        "dataIndex": "NO",
+        "title": "编号",
+        "isKey": true,
+        "isLinkUrl": true,
+        "LinkUrl": "_self",
+        "isRefKey": false,
+        "hide": false,
+        "canQuery": true,
+        "canEdit": false,
+        "controlType": "number",
+        "controlBasicInfo": {}
+      },
+      {
+        "dataIndex": "NAME",
+        "title": "名称",
+        "isKey": false,
+        "isLinkUrl": false,
+        "isRefKey": false,
+        "hide": false,
+        "canQuery": true,
+        "canEdit": false,
+        "controlType": "text",
+        "controlBasicInfo": {}
+      },
+      {
+        "dataIndex": "StartTime",
+        "title": "开始时间",
+        "isKey": false,
+        "isLinkUrl": false,
+        "isRefKey": false,
+        "hide": false,
+        "canQuery": true,
+        "canEdit": false,
+        "controlType": "datepicker",
+        "controlBasicInfo": {}
+      },
+      {
+        "dataIndex": "TYPE",
+        "title": "类型",
+        "isKey": false,
+        "isLinkUrl": false,
+        "isRefKey": false,
+        "hide": false,
+        "canQuery": true,
+        "canEdit": false,
+        "controlType": "select",
+        "controlBasicInfo": {
+          "items": [
             {
-                "field": "NO",
-                "displayName": "编号",
-                "isKey": true,
-                "isLinkUrl": true,
-                "LinkUrl": "_self",
-                "isRefKey": false,
-                "hide": false,
-                "canQuery": true,
-                "canEdit": false,
-                "controlType": "number",
-                "controlBasicInfo": {}
+              "value": "cool",
+              "name": "好",
+              "desc": "it's great"
             },
             {
-                "field": "NAME",
-                "displayName": "名称",
-                "isKey": false,
-                "isLinkUrl": false,
-                "isRefKey": false,
-                "hide": false,
-                "canQuery": true,
-                "canEdit": false,
-                "controlType": "text",
-                "controlBasicInfo": {}
-            },
-             {
-                "field": "StartTime",
-                "displayName": "开始时间",
-                "isKey": false,
-                "isLinkUrl": false,
-                "isRefKey": false,
-                "hide": false,
-                "canQuery": true,
-                "canEdit": false,
-                "controlType": "datepicker",
-                "controlBasicInfo": {}
+              "value": "notSoCool",
+              "name": "没那么好",
+              "desc": "it's not very great"
             },
             {
-                "field": "TYPE",
-                "displayName": "类型",
-                "isKey": false,
-                "isLinkUrl": false,
-                "isRefKey": false,
-                "hide": false,
-                "canQuery": true,
-                "canEdit": false,
-                "controlType": "select",
-                "controlBasicInfo": {
-                    "items": [
-                        {
-                            "value": "cool",
-                            "name": "好",
-                            "desc": "it's great"
-                        },
-                        {
-                            "value": "notSoCool",
-                            "name": "没那么好",
-                            "desc": "it's not very great"
-                        },
-                        {
-                            "value": "bad",
-                            "name": "不好",
-                            "desc": "it's bad"
-                        }
-                    ]
-                }
-            },
-            {
-                "field": "STATUS",
-                "displayName": "状态",
-                "isKey": false,
-                "isLinkUrl": false,
-                "isRefKey": false,
-                "hide": false,
-                "canQuery": true,
-                "canEdit": false,
-                "controlType": "select",
-                "controlBasicInfo": {
-                    "dataUrl": "http://localhost:3001/getAllStatus"
-                }
+              "value": "bad",
+              "name": "不好",
+              "desc": "it's bad"
             }
-        ],
-        "data":[
-            {
-                "NO": "001",
-                "NAME": "test1",
-                "TYPE": "cool",
-                "STATUS": "Opened"
-            },
-            {
-                "NO": "002",
-                "NAME": "test2",
-                "TYPE": "notSoCool",
-                "STATUS": "InProgress"
-            },
-            {
-                "NO": "003",
-                "NAME": "test3",
-                "TYPE": "bad",
-                "STATUS": "Closed"
-            }
-
-        ]
+          ]
+        }
+      },
+      {
+        "dataIndex": "STATUS",
+        "title": "状态",
+        "isKey": false,
+        "isLinkUrl": false,
+        "isRefKey": false,
+        "hide": false,
+        "canQuery": true,
+        "canEdit": false,
+        "controlType": "select",
+        "controlBasicInfo": {
+          "dataUrl": "http://localhost:3001/getAllStatus"
+        }
+      }
+    ]
+  },
+  "data": [
+    {
+      "NO": "001",
+      "NAME": "test1",
+      "TYPE": "cool",
+      "STATUS": "Opened"
+    },
+    {
+      "NO": "002",
+      "NAME": "test2",
+      "TYPE": "notSoCool",
+      "STATUS": "InProgress"
+    },
+    {
+      "NO": "003",
+      "NAME": "test3",
+      "TYPE": "bad",
+      "STATUS": "Closed"
     }
+  ]
 }

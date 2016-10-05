@@ -1,0 +1,19 @@
+var webpack = require('webpack');
+var WebpackDevServer = require('webpack-dev-server');
+var config = require('./webpack.config');
+
+new WebpackDevServer(webpack(config), {
+  publicPath: config.output.publicPath,
+      colors: true,
+    progress: true,
+    inline: true,
+// devtool: "inline-source-map",
+  hot: true,
+  historyApiFallback: true
+}).listen(3001, 'localhost', function (err, result) {
+  if (err) {
+    return console.log(err);
+  }
+
+  console.log('Listening at http://localhost:8008/');
+});

@@ -33,30 +33,7 @@ class CoreDataTable extends Component {
             ...filters,
     });
 };
-fetch(params = {}) {
-    console.log('请求参数：', params);
-    this.setState({ loading: true });
-    reqwest({
-        url: 'http://api.randomuser.me',
-        method: 'get',
-        data: {
-            results: 10,
-                ...params,
-            },
-type: 'json',
-        })
-        .then(data => {
-    const pagination = this.state.pagination;
-    // Read total count from server
-    // pagination.total = data.totalCount;
-    pagination.total = 200;
-    this.setState({
-        loading: false,
-        data: data.results,
-        pagination,
-    });
-});
-  };
+
 
 
 onSelectChange(selectedRowKeys) {
@@ -79,26 +56,28 @@ fetch(params = {}) {
     console.log('请求参数：', params);
     this.setState({ loading: true });
     reqwest({
-        url: 'http://api.randomuser.me',
+        url: this.props.config.queryUrl,//'http://api.randomuser.me',
         method: 'get',
+        crossOrigin:true,
         data: {
             results: 10,
             ...params,
-      },
-type: 'json',
-    }).then(data => {
+            },
+        type: 'json',
+        })
+        .then(data => {
+            console.log("表数据", data);
     const pagination = this.state.pagination;
     // Read total count from server
     // pagination.total = data.totalCount;
     pagination.total = 200;
     this.setState({
         loading: false,
-        data: data.results,
+        data: data,
         pagination,
     });
 });
   };
-
 render() {
         
     var CoreDataTable_SearchBarForm = Form.create()(CoreDataTable_SearchBar);
@@ -113,7 +92,7 @@ render() {
 
                     {//<CoreDataTable_ToolBar ></CoreDataTable_ToolBar>
                     }
-                    <CoreDataTable_MainTable filterTable={this.filterTable}></CoreDataTable_MainTable>
+                    <CoreDataTable_MainTable filterTable={this.filterTable} columns={this.props.config.columns} dataSource={this.state.data}></CoreDataTable_MainTable>
                 </Card>
             </Row>
         </div>

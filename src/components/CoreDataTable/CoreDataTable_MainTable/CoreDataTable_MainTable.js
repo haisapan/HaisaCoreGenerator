@@ -1,31 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import { Table, Input } from 'antd';
-// import 'whatwg-fetch';
+
 import reqwest from 'reqwest';
-
-const columns = [{
-    title: '姓名',
-    dataIndex: 'name',
-    sorter: true,
-    render: name => `${name.first} ${name.last}`,
-    // width: '20%',
-}, {
-        title: '性别',
-        dataIndex: 'gender',
-        sorter: true,
-        // filters: [
-        //     { text: 'Male', value: 'male' },
-        //     { text: 'Female', value: 'female' },
-        // ],
-        // width: '20%',
-    }, {
-        title: '邮箱',
-        dataIndex: 'email',
-
-        // render: email => {
-        //     return <Input type="text" defaultValue={email} style={{ maxWidth: 200 }}/>;
-        // }
-    }];
 
 class CoreDataTable_MainTable extends Component {
     constructor(props) {
@@ -71,9 +47,9 @@ class CoreDataTable_MainTable extends Component {
 
         return (
             <div>
-                <Table columns={columns} bordered={true}
-                    rowKey={record => record.registered}
-                    dataSource={this.state.data}
+                <Table columns={this.props.columns} bordered={true}
+                    rowKey={record => record.NO}
+                    dataSource={this.props.dataSource}
                     rowSelection={rowSelection}
                     pagination={this.state.pagination}
                     loading={this.state.loading}

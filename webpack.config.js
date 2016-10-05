@@ -13,7 +13,7 @@ module.exports = {
   // 檔案起始點從 entry 進入，因為是陣列所以也可以是多個檔案
   entry: [
     // "babel-polyfill",
-    'webpack-dev-server/client?http://localhost:8008',
+    'webpack-dev-server/client?http://localhost:3001',
     'webpack/hot/only-dev-server',
     './src/index.js',
   ],
@@ -21,7 +21,7 @@ module.exports = {
   output: {
     path: `${__dirname}/dist`,
     filename: 'index.js',
-    //  publicPath: '/dist' 
+     publicPath: '/dist' 
   },
   module: {
 
@@ -37,7 +37,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loaders: ['babel?presets[]=es2015,presets[]=react,presets[]=stage-0'],
+        loaders: ['react-hot', 'babel?presets[]=es2015,presets[]=react,presets[]=stage-0'],
         // query: {
         //   presets: ['es2015', 'react', 'stage-0'],
         // },
@@ -71,7 +71,7 @@ module.exports = {
     hot: true,
     port: 8008,
   },
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'eval-source-map',
   // plugins 放置所使用的外掛
   plugins: [
     // HTMLWebpackPluginConfig,
