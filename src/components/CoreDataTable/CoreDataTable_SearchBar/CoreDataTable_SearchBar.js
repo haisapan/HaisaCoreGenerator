@@ -20,7 +20,7 @@ class CoreDataTable_SearchBar extends Component {
         e.preventDefault();
         console.log('收到表单值：', this.props.form.getFieldsValue());
         var filterItems=this.props.form.getFieldsValue();
-        this.props.filterTable({}, filterItems, null);
+        this.props.filterTable({}, filterItems, {});
     };
     resetSearch(e){
         e.preventDefault();
