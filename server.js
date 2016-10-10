@@ -4,10 +4,10 @@ var config = require('./webpack.config');
 
 new WebpackDevServer(webpack(config), {
   publicPath: config.output.publicPath,
-      colors: true,
-    progress: true,
-    inline: true,
-// devtool: "inline-source-map",
+  colors: true,
+  progress: true,
+  inline: true,
+  // devtool: "inline-source-map",
   hot: true,
   historyApiFallback: true
 }).listen(3001, 'localhost', function (err, result) {

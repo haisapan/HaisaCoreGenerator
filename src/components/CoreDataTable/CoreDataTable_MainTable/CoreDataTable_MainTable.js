@@ -14,7 +14,7 @@ class CoreDataTable_MainTable extends Component {
         };
 
         this.handleTableChange = this.handleTableChange.bind(this);
-        this.onSelectChange = this.onSelectChange.bind(this);
+        // this.onSelectChange = this.onSelectChange.bind(this);
 
     };
 
@@ -28,10 +28,10 @@ class CoreDataTable_MainTable extends Component {
 
     };
 
-    onSelectChange(selectedRowKeys) {
-        console.log('selectedRowKeys changed: ', selectedRowKeys);
-        this.setState({ selectedRowKeys });
-    };
+    // onSelectChange(selectedRowKeys) {
+    //     console.log('selectedRowKeys changed: ', selectedRowKeys);
+    //     this.setState({ selectedRowKeys });
+    // };
 
     componentDidMount() {
         // this.fetch();
@@ -39,10 +39,10 @@ class CoreDataTable_MainTable extends Component {
     };
 
     render() {
-
+        console.log(this.props);
         const rowSelection = {
-            selectedRowKeys: this.state.selectedRowKeys,
-            onChange: this.onSelectChange,
+            selectedRowKeys: this.props.selectedRowKeys,
+            onChange: this.props.onSelectChange,
         };
 
         return (

@@ -10,6 +10,7 @@
     "addUrl": "http://localhost:3000/coretable",
     "enableEdit": true,
     "editUrl": "http://localhost:3000/coretable",
+    "editWay": "inline",
     "enableDelete": true,
     "deleteUrl": "http://localhost:3000/coretable",
     "autoHeight": true,
