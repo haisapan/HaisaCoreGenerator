@@ -32,7 +32,7 @@ class CoreDataTable_SearchBar extends Component {
     };
 
     render() {
-        const { getFieldProps } = this.props.form;
+        const { getFieldDecorator } = this.props.form;
         console.log(this.props.columns)
         return (
             <div style={{ padding: '0px' }}>
@@ -47,7 +47,10 @@ class CoreDataTable_SearchBar extends Component {
                                             labelCol={{ span: 10 }}
                                             wrapperCol={{ span: 14 }}
                                             >
-                                            <Input placeholder={column.title} size="default" {...getFieldProps(column.dataIndex, { initialValue: '' }) } />
+                                             {getFieldDecorator(column.dataIndex, { initialValue: '' })(
+                        <Input  placeholder={column.title} size="default"  />
+                    )}
+                                           
                                         </FormItem>
                                     </Col>);
                             })
