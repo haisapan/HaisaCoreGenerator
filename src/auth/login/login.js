@@ -1,6 +1,10 @@
 import React, {Component, PropTypes} from 'react';
 import jwt_decode from 'jwt-decode';
 
+import Style from '../../../res/test.css';
+Style.use();
+// Style.unuse();
+
 class Login extends Component {
     constructor(props) {
         super(props);
@@ -17,7 +21,7 @@ class Login extends Component {
 
     render() {
         return (
-            <div>
+            <div >
                 Login
                 <form action="">
                     <input name="userName" ref="userName" type="text"/>

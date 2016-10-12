@@ -14,6 +14,10 @@ const FormItem = Form.Item;
 const Option = Select.Option;
 const RadioGroup = Radio.Group;
 
+import Style from '../../../res/test.css';
+// Style.use();
+// Style.unuse();
+
 
 class CoreDataTable extends Component {
 

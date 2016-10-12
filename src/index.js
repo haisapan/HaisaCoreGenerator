@@ -19,8 +19,9 @@ ReactDOM.render(
                 // <Route path="/datatable"  component={DataTable} ></Route>
                 // <Route path="/myform" component={MyForm}></Route>
             }
-            <Route path="login" component={Login}></Route>
+            
         </Route>
+        <Route path="/login" component={Login}></Route>
     </Router>,
     document.getElementById('root')
 );

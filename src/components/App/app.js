@@ -44,15 +44,16 @@ const App = React.createClass({
     componentWillMount() {
         // intervalTimer = null;
     },
-    shouldComponentUpdate(nextProps, nextState, nextContext) {
+    // shouldComponentUpdate(nextProps, nextState, nextContext) {
 
-        return true;
+    //     return true;
 
-    },
+    // },
 
     render() {
 
         return (<div>
+        <Link to="/login">login</Link> 
                    <CoreDataTable config={tableConfig.coreTable}></CoreDataTable>
             {this.props.children}
         </div>
