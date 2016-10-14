@@ -190,9 +190,9 @@ render() {
             <Modal title="编辑" visible={this.state.editVisible}
                 onOk={this.editFinish.bind(this)} onCancel={this.editCancel.bind(this)}
                 >
-                <p>
+               
                  <EditForm fields={this.props.config.columns} initRowData={this.state.selectRow}></EditForm>
-                </p>
+               
 
             </Modal>
 

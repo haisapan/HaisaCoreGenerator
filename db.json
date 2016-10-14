@@ -95,6 +95,31 @@
         }
       },
       {
+        "dataIndex": "SEX",
+        "title": "性别",
+        "isKey": false,
+        "isLinkUrl": false,
+        "isRefKey": false,
+        "hide": false,
+        "canQuery": true,
+        "canEdit": false,
+        "controlType": "radio",
+        "controlBasicInfo": {
+          "items": [
+            {
+              "value": "man",
+              "name": "男",
+              "desc": "it's great"
+            },
+            {
+              "value": "feman",
+              "name": "女",
+              "desc": "it's not very great"
+            }
+          ]
+        }
+      },
+      {
         "dataIndex": "STATUS",
         "title": "状态",
         "isKey": false,
@@ -108,7 +133,7 @@
           "dataUrl": "http://localhost:3001/getAllStatus"
         }
       },
-          {
+      {
         "dataIndex": "DESC",
         "title": "备注",
         "isKey": false,

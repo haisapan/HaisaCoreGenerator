@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import { Button, Input, InputNumber, Radio, Checkbox, Select } from 'antd';
-
+import { Form, Button, Input, InputNumber, Radio, Checkbox, Select } from 'antd';
+const FormItem = Form.Item;
+const RadioGroup = Radio.Group;
+const Option=Select.Option;
 
 class ControlGenerator extends Component {
     constructor(props) {
@@ -25,7 +27,7 @@ class ControlGenerator extends Component {
                     label={field.title}
                     >
                     {getFieldDecorator(field.dataIndex, { initialValue: field.defaultValue })(
-                        <InputNumber type="text" />
+                        <InputNumber  />
                     )}
                 </FormItem>;
         }
@@ -40,42 +42,76 @@ class ControlGenerator extends Component {
                 </FormItem>;
         }
 
-        if (config.controlType == "select") {
-            if (config.controlBasicInfo.items) {  //固定的Items
-                var options = config.controlBasicInfo.item.map((option) => {
-                    <Option value={option.value}>{option.name}</Option>
+        if (field.controlType == "select") {
+            var options=[];
+            if (field.controlBasicInfo.items) {  //固定的Items
+                options = field.controlBasicInfo.items.map((option) => {
+                    return <Option value={option.value}>{option.name}</Option>
                 })
             }
-            if(config.controlBasicInfo.dataUrl){
+            if(field.controlBasicInfo.dataUrl){
                 //TODO  加上异步的Option获取的方式
             }
+console.log("select", options);
+            var control = <FormItem
+                    {...formItemLayout}
+                    label={field.title}
+                    >
+                    {getFieldDecorator(field.dataIndex, { initialValue: field.defaultValue })(
+                           <Select>
+                                {options}
+                            </Select>
+                    )}
+                </FormItem>;
 
-            var control = <Select>
-                {options}
-
-            </Select>;
             return control;
         }
-        if (config.controlType == "radio") {
-            return <Radio />;
+        if (field.controlType == "radio") {
+            var options=[];
+             if (field.controlBasicInfo.items) {  //固定的Items
+                options = field.controlBasicInfo.items.map((option) => {
+                   return  <Radio value={option.value}>{option.name}</Radio>
+                })
+            }
+            if(field.controlBasicInfo.dataUrl){
+                //TODO  加上异步的Option获取的方式
+            }
+            return <FormItem
+                    {...formItemLayout}
+                    label={field.title}
+                    >
+                    {getFieldDecorator(field.dataIndex, { initialValue: field.defaultValue })(
+                        <RadioGroup>
+                            {options}
+                        </RadioGroup>
+                    )}
+                </FormItem>;
+            // return <Radio />;
         }
 
-        if (config.controlType == "checkbox") {
-
-            return <Checkbox />;
+        if (field.controlType == "checkbox") {
+                return <FormItem
+                    {...formItemLayout}
+                    label={<span>{field.title}</span>}
+                    >
+                    {getFieldDecorator(field.dataIndex, { initialValue: false, valuePropName: 'checked' })(
+                        <Checkbox></Checkbox>
+                    )}
+                </FormItem>;
+            
         }
 
         return <span></span>
     }
 
     render() {
-        var control = this.initControl(this.props.controlConfig);
+        var control = this.initControl(this.props.fieldInfo);
         return control;
     }
 }
 
 ControlGenerator.propTypes = {
-    controlConfig:React.PropTypes.object.isRequired
+    fieldInfo:React.PropTypes.object.isRequired
 };
 
 export default ControlGenerator;
