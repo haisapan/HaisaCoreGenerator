@@ -107,6 +107,18 @@
         "controlBasicInfo": {
           "dataUrl": "http://localhost:3001/getAllStatus"
         }
+      },
+          {
+        "dataIndex": "DESC",
+        "title": "备注",
+        "isKey": false,
+        "isLinkUrl": false,
+        "isRefKey": false,
+        "hide": false,
+        "canQuery": true,
+        "canEdit": false,
+        "controlType": "textarea",
+        "controlBasicInfo": {}
       }
     ]
   },

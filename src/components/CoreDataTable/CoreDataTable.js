@@ -191,7 +191,7 @@ render() {
                 onOk={this.editFinish.bind(this)} onCancel={this.editCancel.bind(this)}
                 >
                 <p>
-                 <EditForm></EditForm>
+                 <EditForm fields={this.props.config.columns} initRowData={this.state.selectRow}></EditForm>
                 </p>
 
             </Modal>
