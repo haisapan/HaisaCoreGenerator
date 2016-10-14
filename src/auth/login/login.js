@@ -1,8 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import jwt_decode from 'jwt-decode';
 
-import Style from '../../../res/test.css';
-Style.use();
+// import Style from '../../../res/test.css';
+// Style.use();
 // Style.unuse();
 
 class Login extends Component {

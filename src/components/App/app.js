@@ -27,16 +27,16 @@ const App = React.createClass({
         if (!this.isMounted()) {
             return;
         }
-        setTimeout(() => {
-            var columns = [{
-                field: 'NO',
-                title: '编号'
-            }, {
-                    field: 'NAME',
-                    title: '名称'
-                }];
-            this.setState({ columns: columns });
-        }, 5000);
+        // setTimeout(() => {
+        //     var columns = [{
+        //         field: 'NO',
+        //         title: '编号'
+        //     }, {
+        //             field: 'NAME',
+        //             title: '名称'
+        //         }];
+        //     this.setState({ columns: columns });
+        // }, 5000);
     },
     changeName(item) {
         console.log(item);
@@ -53,8 +53,8 @@ const App = React.createClass({
     render() {
 
         return (<div>
-        <Link to="/login">login</Link> 
-                   <CoreDataTable config={tableConfig.coreTable}></CoreDataTable>
+            <Link to="/login">login</Link>
+            <CoreDataTable config={tableConfig.coreTable}></CoreDataTable>
             {this.props.children}
         </div>
 
