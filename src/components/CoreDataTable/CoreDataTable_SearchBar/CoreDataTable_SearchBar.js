@@ -11,7 +11,7 @@ class CoreDataTable_SearchBar extends Component {
     constructor(props) {
         super(props);
         /**Bind the method to this */
-        this.componentDidMount = this.componentDidMount.bind(this);
+
         this.formSubmit = this.formSubmit.bind(this);
         this.resetSearch = this.resetSearch.bind(this);
     };
@@ -30,10 +30,6 @@ class CoreDataTable_SearchBar extends Component {
     resetSearch(e) {
         e.preventDefault();
         this.props.form.resetFields();
-    };
-
-    createCompententType(field) {
-
     };
 
     render() {
@@ -75,4 +71,5 @@ CoreDataTable_SearchBar.propTypes = {
     columns: React.PropTypes.array.isRequired
 };
 
-export default CoreDataTable_SearchBar;
+  var CoreDataTable_SearchBarForm = Form.create()(CoreDataTable_SearchBar);
+export default CoreDataTable_SearchBarForm;

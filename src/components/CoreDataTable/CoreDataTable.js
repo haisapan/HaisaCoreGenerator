@@ -195,13 +195,13 @@ editCancel(){
 
 render() {
 
-    var CoreDataTable_SearchBarForm = Form.create()(CoreDataTable_SearchBar);
+    // var CoreDataTable_SearchBarForm = Form.create()(CoreDataTable_SearchBar);
     return (
         <div className="core-table">
             <Row>
                 <Card span="20">
                     <Card>
-                        <CoreDataTable_SearchBarForm columns={this.props.config.columns} filterTable={this.filterTable}></CoreDataTable_SearchBarForm>
+                        <CoreDataTable_SearchBar columns={this.props.config.columns} filterTable={this.filterTable}></CoreDataTable_SearchBar>
                     </Card>
                     {
                         <CoreDataTable_ToolBar {...this.toolBarFunc}></CoreDataTable_ToolBar>
