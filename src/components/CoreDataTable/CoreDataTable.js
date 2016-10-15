@@ -91,7 +91,7 @@ type: 'json',
     pagination.total = 200;
     this.setState({
         loading: false,
-        data: data,
+        dataSource: data,
         pagination,
     });
 });
@@ -107,9 +107,14 @@ addRow(rowData = {}) {
         data: rowData,
         type: 'json',
     })
-        .then(data => {
-            console.log("创建成功", data);
+        .then(result => {
+            console.log("创建成功", result);
 
+            this.setState({
+                loading: false,
+                dataSource: this.state.dataSource.push(rowData),
+                pagination,
+            });
             // const pagination = this.state.pagination;
             // // Read total count from server
             // // pagination.total = data.totalCount;
@@ -119,6 +124,12 @@ addRow(rowData = {}) {
             //     data: data,
             //     pagination,
             // });
+        })
+        .catch((err)=>{
+             Modal.error({
+                title: '错误',
+                content: '添加失败',
+            });
         });
 };
 
@@ -144,6 +155,12 @@ updateRow(rowData = {}) {
             //     data: data,
             //     pagination,
             // });
+        })
+            .catch((err)=>{
+             Modal.error({
+                title: '错误',
+                content: '更新失败',
+            });
         });
 };
 
@@ -196,7 +213,7 @@ editItem(){
     }
 
     var selectEditRowKey = this.state.selectedRowKeys[0];
-    var selectEditRow = _.find(this.state.data, { NO: selectEditRowKey });
+    var selectEditRow = _.find(this.state.dataSource, { NO: selectEditRowKey });
 
     //  第一次setFieldsValue的时候，Modal还没渲染，所以要在setState中的回调函数里调用
     this.setState({ editVisible: true }, () => {
@@ -247,7 +264,13 @@ deleteItem(){
             //     data: data,
             //     pagination,
             // });
-        });
+        }) 
+          .catch((err)=>{
+             Modal.error({
+                title: '错误',
+                content: '删除失败',
+            });
+        });;
 };
 
 /**
@@ -293,7 +316,7 @@ render() {
                     <CoreDataTable_MainTable
                         filterTable={this.filterTable}
                         columns={this.props.config.columns}
-                        dataSource={this.state.data}
+                        dataSource={this.state.dataSource}
                         selectedRowKeys={this.state.selectedRowKeys}
                         onSelectChange={this.onSelectChange}
                         >
