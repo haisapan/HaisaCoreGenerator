@@ -20,8 +20,8 @@ class ControlGenerator extends Component {
         // console.log(field);
         const { getFieldDecorator } = this.props.form;
         const formItemLayout = {
-            labelCol: { span: 6 },
-            wrapperCol: { span: 14 },
+            labelCol: { span: 8 },
+            wrapperCol: { span: 12 },
         };
         
         /**数字框 */

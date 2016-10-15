@@ -43,11 +43,11 @@ class CoreDataTable_SearchBar extends Component {
         return (
             <div style={{ padding: '0px' }}>
                 <Form horizontal className="ant-advanced-search-form" onSubmit={this.formSubmit}>
-                    <Row>
+                    <Row type="flex" justify="start">
                         {
                             this.props.columns.map((column) => {
                                 return (
-                                    <Col key={"searchbar-control-" + column.dataIndex} span={6} md={4} xs={12}>
+                                    <Col key={"searchbar-control-" + column.dataIndex} span={6} md={4} xs={12} style={{height:"100% !important"}}>
                                         <ControlGenerator  form={this.props.form} fieldInfo={column} {...formItemLayout}></ControlGenerator>
                                     </Col>
                                 );
@@ -58,9 +58,7 @@ class CoreDataTable_SearchBar extends Component {
                             <Button onClick={this.resetSearch}>清除条件</Button>
                         </Col>
                     </Row>
-                    <Row>
-
-                    </Row>
+                 
                 </Form>
             </div>
         );
