@@ -31,9 +31,11 @@ class EditForm extends Component {
             field.initValue = null;
             if (!this.props.isAdd) { //编辑状态
                 field.initValue = this.props.initRowData[field.dataIndex]
-            }else{
-                field.initValue=null
             }
+            // else{
+            //     // debugger;
+            //     field.initValue=null;
+            // }
 
             return <ControlGenerator key={"control-" + field.dataIndex} form={this.props.form} fieldInfo={field} ></ControlGenerator>
 

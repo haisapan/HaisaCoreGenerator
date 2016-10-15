@@ -8,8 +8,11 @@ class ControlGenerator extends Component {
     constructor(props) {
         super(props);
         this.initControl = this.initControl.bind(this);
-    }
-
+    };
+    ComponentDidMount(){
+        console.log("mount");
+        
+    };
     /**
      * 根据传入的config，生成control
      */
@@ -23,12 +26,13 @@ class ControlGenerator extends Component {
         //   labelCol={this.props.labelCol}
         //                     wrapperCol={this.props.wrapperCol}
         if (field.controlType == "number") {
+            console.log("number init control ")
             return <FormItem
                 {...formItemLayout}
 
                 label={field.title}
                 >
-                {getFieldDecorator(field.dataIndex, field.initValue?{ initialValue: field.initValue }:{})(
+                {getFieldDecorator(field.dataIndex, { initialValue: field.initValue })(
                     <InputNumber />
                 )}
             </FormItem>;
@@ -38,7 +42,7 @@ class ControlGenerator extends Component {
                 {...formItemLayout}
                 label={field.title}
                 >
-                {getFieldDecorator(field.dataIndex, field.initValue?{ initialValue: field.initValue }:{})(
+                {getFieldDecorator(field.dataIndex, { initialValue: field.initValue })(
                     <Input type="text" />
                 )}
             </FormItem>;
@@ -48,7 +52,7 @@ class ControlGenerator extends Component {
                 {...formItemLayout}
                 label={field.title}
                 >
-                {getFieldDecorator(field.dataIndex, field.initValue?{ initialValue: field.initValue }:{})(
+                {getFieldDecorator(field.dataIndex, { initialValue: field.initValue })(
                     <Input type="textarea" />
                 )}
             </FormItem>;

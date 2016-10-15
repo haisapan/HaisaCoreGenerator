@@ -28,14 +28,14 @@ class CoreDataTable extends Component {
         this.editItem = this.editItem.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
-
+        this.resetFormToEmpty=this.resetFormToEmpty.bind(this);
 
         /**设置state */
         this.state = {
             pagination: {},  //分页信息
             editVisible: false, //编辑框是否可见，目前为modal内编辑，后续支持行内编辑
             selectedRowKeys: [],
-            selectEditRow:null,
+            selectEditRow: null,
             isAdd: true
         };
 
@@ -80,29 +80,46 @@ fetch(params = {}) {
             results: 10,
             ...params,
             },
-        type: 'json',
+type: 'json',
         })
         .then(data => {
-            console.log("表数据", data);
-            const pagination = this.state.pagination;
-            // Read total count from server
-            // pagination.total = data.totalCount;
-            pagination.total = 200;
-            this.setState({
-                loading: false,
-                data: data,
-                pagination,
-            });
-        });
+    console.log("表数据", data);
+    const pagination = this.state.pagination;
+    // Read total count from server
+    // pagination.total = data.totalCount;
+    pagination.total = 200;
+    this.setState({
+        loading: false,
+        data: data,
+        pagination,
+    });
+});
   };
 
 /**
  * 添加新行
  */
 addNewItem(){
-    console.log("add new");
-    this.setState({ editVisible: true, selectEditRow: null, isAdd: true });  //TODO 是不是可以通过selectEditRow is null来控制是新增还是编辑
+    console.log("add new", this.refs.editFormInModal);
+    this.resetFormToEmpty();
+    this.setState({ editVisible: true, selectEditRow: {}, isAdd: true });  //TODO 是不是可以通过selectEditRow is null来控制是新增还是编辑
 };
+
+/**
+ * 清空Form.
+ * 与resetFields不同，resetFields是重置为initialValue
+ * 因Moal中的内容不再重新渲染，所以需要重新setFields
+ */
+resetFormToEmpty(){
+    if (this.refs.editFormInModal) {
+        var rowData = {};
+        for (var i = 0; i < this.props.config.columns.length; i++) {
+            var dataIndex = this.props.config.columns[i].dataIndex;
+            rowData[dataIndex] = null;
+        }
+        this.refs.editFormInModal.setFieldsValue(rowData);
+    }
+}
 
 /**
  * 编辑一条信息
@@ -127,10 +144,11 @@ editItem(){
         return;
     }
 
-    var selectEditRowKey=this.state.selectedRowKeys[0];
-    var selectEditRow=_.find(this.state.data, {NO: selectEditRowKey});
+    var selectEditRowKey = this.state.selectedRowKeys[0];
+    var selectEditRow = _.find(this.state.data, { NO: selectEditRowKey });
 
-    this.setState({ editVisible: true, selectEditRow:selectEditRow, isAdd: false  });
+//  this.resetFormToEmpty();
+    this.setState({ editVisible: true, selectEditRow: selectEditRow, isAdd: false });
 };
 
 /**
@@ -156,18 +174,18 @@ deleteItem(){
 editFinish(){
     console.log(this.refs.editFormInModal);
     // this.refs.editFormInModal.getFormData();
-var editRow=this.refs.editFormInModal.getFieldsValue();
-    
+    var editRow = this.refs.editFormInModal.getFieldsValue();
+
     console.log("finish edit", editRow);
-     
+
     this.setState({ editVisible: false });
-    this.refs.editFormInModal.resetFields();
+     this.resetFormToEmpty();
 };
 /**
  * 取消编辑
  */
 editCancel(){
-     this.refs.editFormInModal.resetFields();
+    this.resetFormToEmpty();
     this.setState({ editVisible: false });
 }
 
@@ -200,8 +218,8 @@ render() {
 
             <Modal title="新增/编辑" visible={this.state.editVisible}
                 onOk={this.editFinish.bind(this)} onCancel={this.editCancel.bind(this)}
-                >               
-                 <EditForm ref="editFormInModal" fields={this.props.config.columns} initRowData={this.state.selectEditRow} isAdd={this.state.isAdd}></EditForm>               
+                >
+                <EditForm ref="editFormInModal" fields={this.props.config.columns} initRowData={this.state.selectEditRow} isAdd={this.state.isAdd}></EditForm>
             </Modal>
 
         </div>
