@@ -10,7 +10,10 @@ class componentName extends Component {
     // addNewItem(){
     //     this.props.addNewItem();
     // };
-
+    componentDidMount() {
+        console.log("toolbar mount")
+        // console.log(this.props)
+    };
     render() {
         return (
             <div className="toolbar" data-desc="toolBar">

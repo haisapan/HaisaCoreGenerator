@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Table, Input } from 'antd';
 
 import reqwest from 'reqwest';
@@ -9,7 +9,12 @@ class CoreDataTable_MainTable extends Component {
         this.state = {
             selectedRowKeys: [],  // 这里配置默认勾选列
             data: [],
-            pagination: {},
+            pagination: {
+                showSizeChanger: true,
+                onShowSizeChange(current, pageSize) {
+                    console.log('Current: ', current, '; PageSize: ', pageSize);
+                },
+            },
             loading: false,
         };
 
@@ -39,7 +44,7 @@ class CoreDataTable_MainTable extends Component {
     };
 
     render() {
-        console.log(this.props);
+        // console.log(this.props);
         const rowSelection = {
             selectedRowKeys: this.props.selectedRowKeys,
             onChange: this.props.onSelectChange,

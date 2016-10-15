@@ -10,7 +10,7 @@ class ControlGenerator extends Component {
         this.initControl = this.initControl.bind(this);
     };
     ComponentDidMount(){
-        console.log("mount");
+        // console.log("mount");
         
     };
     /**
@@ -26,7 +26,7 @@ class ControlGenerator extends Component {
         
         /**数字框 */
         if (field.controlType == "number") {
-            console.log("number init control ")
+            // console.log("number init control ")
             return <FormItem
                 {...formItemLayout}
 
@@ -73,7 +73,7 @@ class ControlGenerator extends Component {
             if (field.controlBasicInfo.dataUrl) {
                 //TODO  加上异步的Option获取的方式
             }
-            console.log("select", options);
+            // console.log("select", options);
             var control = <FormItem
                 {...formItemLayout}
                 label={field.title}

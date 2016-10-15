@@ -14,7 +14,10 @@ const FormItem = Form.Item;
 const Option = Select.Option;
 const RadioGroup = Radio.Group;
 
-
+/**CoreDataTable组件，根据config自动生成页面
+ * 使用：<CoreDataTable config={tableConfig.coreTable}></CoreDataTable>
+ * config数据示例见： db.json
+ */
 class CoreDataTable extends Component {
 
     constructor(props) {
@@ -46,23 +49,20 @@ class CoreDataTable extends Component {
             deleteItem: this.deleteItem
         };
 
-        // this.tableFunc={
-        //     selectedRowKeys:this.state.selectedRowKeys,
-        //     onSelectChange:this.onSelectChange
-        // }
     };
 
-
+    /**选中表格的某些行 */
     onSelectChange(selectedRowKeys) {
         console.log('selectedRowKeys changed: ', selectedRowKeys);
         this.setState({ selectedRowKeys });
     };
 
-
+    /**查询表格数据 */
     filterTable(pagination = {}, filters, sorter = {}) {
+        // debugger;
         this.fetch({
-            results: pagination.pageSize,
-            page: pagination.current,
+            pageSize: pagination.pageSize||10,
+            page: pagination.current||1,
             sortField: sorter.field,
             sortOrder: sorter.order,
             ...filters,
@@ -72,15 +72,16 @@ class CoreDataTable extends Component {
 fetch(params = {}) {
     console.log('请求参数：', params);
     this.setState({ loading: true });
+
     reqwest({
         url: this.props.config.queryUrl,//'http://api.randomuser.me',
         method: 'get',
         crossOrigin: true,
         data: {
-            results: 10,
+            // results: 10,
             ...params,
             },
-type: 'json',
+            type: 'json',
         })
         .then(data => {
     console.log("表数据", data);
@@ -211,7 +212,8 @@ render() {
                         dataSource={this.state.data}
                         selectedRowKeys={this.state.selectedRowKeys}
                         onSelectChange={this.onSelectChange}
-                        ></CoreDataTable_MainTable>
+                        >
+                        </CoreDataTable_MainTable>
                 </Card>
             </Row>
 

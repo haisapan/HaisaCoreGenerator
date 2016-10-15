@@ -53,7 +53,7 @@ const App = React.createClass({
     render() {
 
         return (<div>
-            <Link to="/login">login</Link>
+            {/*<Link to="/login">login</Link>*/}
             <CoreDataTable config={tableConfig.coreTable}></CoreDataTable>
             {this.props.children}
         </div>
