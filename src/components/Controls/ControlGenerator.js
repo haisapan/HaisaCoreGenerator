@@ -23,8 +23,8 @@ class ControlGenerator extends Component {
             labelCol: { span: 6 },
             wrapperCol: { span: 14 },
         };
-        //   labelCol={this.props.labelCol}
-        //                     wrapperCol={this.props.wrapperCol}
+        
+        /**数字框 */
         if (field.controlType == "number") {
             console.log("number init control ")
             return <FormItem
@@ -32,32 +32,37 @@ class ControlGenerator extends Component {
 
                 label={field.title}
                 >
-                {getFieldDecorator(field.dataIndex, { initialValue: field.initValue })(
+                {getFieldDecorator(field.dataIndex)(
                     <InputNumber />
                 )}
             </FormItem>;
         }
+
+        /**文本框 */
         if (field.controlType == "text") {
             return <FormItem
                 {...formItemLayout}
                 label={field.title}
                 >
-                {getFieldDecorator(field.dataIndex, { initialValue: field.initValue })(
+                {getFieldDecorator(field.dataIndex)(
                     <Input type="text" />
                 )}
             </FormItem>;
         }
+
+         /**textarea */
         if (field.controlType == "textarea") {
             return <FormItem
                 {...formItemLayout}
                 label={field.title}
                 >
-                {getFieldDecorator(field.dataIndex, { initialValue: field.initValue })(
+                {getFieldDecorator(field.dataIndex)(
                     <Input type="textarea" />
                 )}
             </FormItem>;
         }
 
+        /**选择框 */
         if (field.controlType == "select") {
             var options = [];
             if (field.controlBasicInfo.items) {  //固定的Items
@@ -73,7 +78,7 @@ class ControlGenerator extends Component {
                 {...formItemLayout}
                 label={field.title}
                 >
-                {getFieldDecorator(field.dataIndex, field.initValue?{ initialValue: field.initValue }:{})(
+                {getFieldDecorator(field.dataIndex)(
                     <Select>
                         {options}
                     </Select>
@@ -82,6 +87,8 @@ class ControlGenerator extends Component {
 
             return control;
         }
+
+        /**单选框 */
         if (field.controlType == "radio") {
             var options = [];
             if (field.controlBasicInfo.items) {  //固定的Items
@@ -96,7 +103,7 @@ class ControlGenerator extends Component {
                 {...formItemLayout}
                 label={field.title}
                 >
-                {getFieldDecorator(field.dataIndex, field.initValue?{ initialValue: field.initValue }:{})(
+                {getFieldDecorator(field.dataIndex)(
                     <RadioGroup>
                         {options}
                     </RadioGroup>
@@ -105,33 +112,37 @@ class ControlGenerator extends Component {
             // return <Radio />;
         }
 
+        /**checkbox */
         if (field.controlType == "checkbox") {
             return <FormItem
                 {...formItemLayout}
                 label={<span>{field.title}</span>}
                 >
-                {getFieldDecorator(field.dataIndex, field.initValue?{ initialValue: field.initValue, valuePropName: 'checked' }:{})(
+                {getFieldDecorator(field.dataIndex, { initialValue: field.initValue, valuePropName: 'checked' })(
                     <Checkbox></Checkbox>
                 )}
             </FormItem>;
         }
 
+        /**日期选择 */
         if (field.controlType == "datepicker") {
             return <FormItem
                 {...formItemLayout}
                 label={<span>{field.title}</span>}
                 >
-                {getFieldDecorator(field.dataIndex, field.initValue?{ initialValue: field.initValue }:{})(
+                {getFieldDecorator(field.dataIndex)(
                    <DatePicker />
                 )}
             </FormItem>;
         }
+
+         /**时间选择 */
         if (field.controlType == "timepicker") {
             return <FormItem
                 {...formItemLayout}
                 label={<span>{field.title}</span>}
                 >
-                {getFieldDecorator(field.dataIndex, field.initValue?{ initialValue: field.initValue }:{})(
+                {getFieldDecorator(field.dataIndex)(
                    <TimePicker  />
                 )}
             </FormItem>;

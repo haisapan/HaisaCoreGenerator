@@ -148,7 +148,8 @@ editItem(){
     var selectEditRow = _.find(this.state.data, { NO: selectEditRowKey });
 
 //  this.resetFormToEmpty();
-    this.setState({ editVisible: true, selectEditRow: selectEditRow, isAdd: false });
+    this.setState({ editVisible: true });
+     this.refs.editFormInModal.setFieldsValue(selectEditRow);
 };
 
 /**
@@ -166,34 +167,34 @@ deleteItem(){
         return;
     }
     console.log("delete", this.state.selectedRowKeys);
+     //TODO AJAX发送到后台API
 };
 
 /**
  * 编辑完成
  */
 editFinish(){
-    console.log(this.refs.editFormInModal);
-    // this.refs.editFormInModal.getFormData();
+
     var editRow = this.refs.editFormInModal.getFieldsValue();
 
     console.log("finish edit", editRow);
-
     this.setState({ editVisible: false });
-     this.resetFormToEmpty();
+
+    //TODO AJAX发送到后台API
+
+    //  this.resetFormToEmpty();
 };
 /**
  * 取消编辑
  */
 editCancel(){
-    this.resetFormToEmpty();
+    // this.resetFormToEmpty();
     this.setState({ editVisible: false });
 }
 
 render() {
 
-
     var CoreDataTable_SearchBarForm = Form.create()(CoreDataTable_SearchBar);
-
     return (
         <div className="core-table">
             <Row>
@@ -201,7 +202,6 @@ render() {
                     <Card>
                         <CoreDataTable_SearchBarForm columns={this.props.config.columns} filterTable={this.filterTable}></CoreDataTable_SearchBarForm>
                     </Card>
-
                     {
                         <CoreDataTable_ToolBar {...this.toolBarFunc}></CoreDataTable_ToolBar>
                     }
