@@ -31,7 +31,7 @@ class CoreDataTable extends Component {
         this.editItem = this.editItem.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
-        this.resetFormToEmpty=this.resetFormToEmpty.bind(this);
+        this.resetFormToEmpty = this.resetFormToEmpty.bind(this);
 
         /**设置state */
         this.state = {
@@ -61,8 +61,8 @@ class CoreDataTable extends Component {
     filterTable(pagination = {}, filters, sorter = {}) {
         // debugger;
         this.fetch({
-            pageSize: pagination.pageSize||10,
-            page: pagination.current||1,
+            pageSize: pagination.pageSize || 10,
+            page: pagination.current || 1,
             sortField: sorter.field,
             sortOrder: sorter.order,
             ...filters,
@@ -81,7 +81,7 @@ fetch(params = {}) {
             // results: 10,
             ...params,
             },
-            type: 'json',
+type: 'json',
         })
         .then(data => {
     console.log("表数据", data);
@@ -96,6 +96,56 @@ fetch(params = {}) {
     });
 });
   };
+
+addRow(rowData = {}) {
+    console.log('创建：', rowData);
+
+    reqwest({
+        url: this.props.config.queryUrl,
+        method: 'post',
+        crossOrigin: true,
+        data: rowData,
+        type: 'json',
+    })
+        .then(data => {
+            console.log("创建成功", data);
+
+            // const pagination = this.state.pagination;
+            // // Read total count from server
+            // // pagination.total = data.totalCount;
+            // pagination.total = 200;
+            // this.setState({
+            //     loading: false,
+            //     data: data,
+            //     pagination,
+            // });
+        });
+};
+
+updateRow(rowData = {}) {
+    console.log('创建：', rowData);
+
+    reqwest({
+        url: this.props.config.queryUrl,
+        method: 'put',
+        crossOrigin: true,
+        data: rowData,
+        type: 'json',
+    })
+        .then(data => {
+            console.log("更新成功", data);
+
+            // const pagination = this.state.pagination;
+            // // Read total count from server
+            // // pagination.total = data.totalCount;
+            // pagination.total = 200;
+            // this.setState({
+            //     loading: false,
+            //     data: data,
+            //     pagination,
+            // });
+        });
+};
 
 /**
  * 添加新行
@@ -148,11 +198,20 @@ editItem(){
     var selectEditRowKey = this.state.selectedRowKeys[0];
     var selectEditRow = _.find(this.state.data, { NO: selectEditRowKey });
 
-//  this.resetFormToEmpty();
-    this.setState({ editVisible: true });
-     this.refs.editFormInModal.setFieldsValue(selectEditRow);
+    //  第一次setFieldsValue的时候，Modal还没渲染，所以要在setState中的回调函数里调用
+    this.setState({ editVisible: true }, () => {
+        //console.log("after setState, if the modal show?");
+        this.refs.editFormInModal.setFieldsValue(selectEditRow);
+
+    });
+
+
 };
 
+
+// confirmDelete(){
+//     this.deleteItem();
+// };
 /**
  * 删除
  */
@@ -168,7 +227,27 @@ deleteItem(){
         return;
     }
     console.log("delete", this.state.selectedRowKeys);
-     //TODO AJAX发送到后台API
+    //TODO AJAX发送到后台API
+    reqwest({
+        url: this.props.config.queryUrl,
+        method: 'delete',
+        crossOrigin: true,
+        data: { deleteKeys: this.state.selectedRowKeys },
+        type: 'json',
+    })
+        .then(data => {
+            console.log("删除成功", data);
+
+            // const pagination = this.state.pagination;
+            // // Read total count from server
+            // // pagination.total = data.totalCount;
+            // pagination.total = 200;
+            // this.setState({
+            //     loading: false,
+            //     data: data,
+            //     pagination,
+            // });
+        });
 };
 
 /**
@@ -182,6 +261,11 @@ editFinish(){
     this.setState({ editVisible: false });
 
     //TODO AJAX发送到后台API
+    if (this.state.isAdd) {
+        this.addRow(editRow);
+    } else {
+        this.updateRow(editRow);
+    }
 
     //  this.resetFormToEmpty();
 };
@@ -213,7 +297,7 @@ render() {
                         selectedRowKeys={this.state.selectedRowKeys}
                         onSelectChange={this.onSelectChange}
                         >
-                        </CoreDataTable_MainTable>
+                    </CoreDataTable_MainTable>
                 </Card>
             </Row>
 
