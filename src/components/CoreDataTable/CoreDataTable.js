@@ -2,7 +2,7 @@
 // import 'antd/dist/antd.css'; 
 import React, { Component, PropTypes } from 'react';
 import { Form, Table, Icon, Card, Row, Modal, Select, Radio } from 'antd';
-
+import _ from 'lodash';
 import reqwest from 'reqwest';
 
 import CoreDataTable_SearchBar from './CoreDataTable_SearchBar/CoreDataTable_SearchBar';
@@ -34,7 +34,9 @@ class CoreDataTable extends Component {
         this.state = {
             pagination: {},  //分页信息
             editVisible: false, //编辑框是否可见，目前为modal内编辑，后续支持行内编辑
-            selectedRowKeys: []
+            selectedRowKeys: [],
+            selectEditRow:null,
+            isAdd: true
         };
 
         /**传递给toolbar的函数集合 */
@@ -99,7 +101,7 @@ type: 'json',
  */
 addNewItem(){
     console.log("add new");
-    this.setState({ editVisible: true });
+    this.setState({ editVisible: true, selectEditRow: null, isAdd: true });  //TODO 是不是可以通过selectEditRow is null来控制是新增还是编辑
 };
 
 /**
@@ -125,7 +127,10 @@ editItem(){
         return;
     }
 
-    this.setState({ editVisible: true });
+var selectEditRowKey=this.state.selectedRowKeys[0];
+var selectEditRow=_.find(this.state.data, {NO: selectEditRowKey});
+
+    this.setState({ editVisible: true, selectEditRow:selectEditRow, isAdd: false  });
 };
 
 /**
@@ -189,10 +194,8 @@ render() {
 
             <Modal title="编辑" visible={this.state.editVisible}
                 onOk={this.editFinish.bind(this)} onCancel={this.editCancel.bind(this)}
-                >
-               
-                 <EditForm fields={this.props.config.columns} initRowData={this.state.selectRow}></EditForm>
-               
+                >               
+                 <EditForm fields={this.props.config.columns} initRowData={this.state.selectEditRow} isAdd={this.state.isAdd}></EditForm>               
 
             </Modal>
 

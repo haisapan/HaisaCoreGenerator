@@ -14,69 +14,24 @@ class EditForm extends Component {
             wrapperCol: { span: 14 },
         };
 
-        var formItems=this.props.fields.map((field)=>{
-            return <ControlGenerator key={"control-"+field.dataIndex} form={this.props.form} fieldInfo={field}></ControlGenerator>
-        //    return  <FormItem
-        //             {...formItemLayout}
-        //             label={field.title}
-        //             >
-        //             {getFieldDecorator(field.dataIndex, { initialValue: '' })(
-        //                 <Input type="text" />
-        //             )}
-        //         </FormItem>;
+
+
+        var formItems = this.props.fields.map((field) => {
+            field.initValue = null;
+            if (!this.props.isAdd) { //编辑状态
+                field.initValue = this.props.initRowData[field.dataIndex]
+            }
+
+            return <ControlGenerator key={"control-" + field.dataIndex} form={this.props.form} fieldInfo={field} ></ControlGenerator>
+
         });
 
         return (
-
             <Form horizontal onSubmit={this.handleSubmit}>
-            {formItems}
-               { // <FormItem
-                //     {...formItemLayout}
-                //     label="User name"
-                //     >
-                //     <p className="ant-form-text" id="userName" name="userName">Big eye minion</p>
-                // </FormItem>
-                // <FormItem
-                //     {...formItemLayout}
-                //     label="Password"
-                //     >
-                //     {getFieldDecorator('pass', { initialValue: '' })(
-                //         <Input type="password" placeholder="Please input the password" />
-                //     )}
-                // </FormItem>
-                // <FormItem
-                //     {...formItemLayout}
-                //     label="Gender"
-                //     >
-                //     {getFieldDecorator('gender', { initialValue: 'female' })(
-                //         <RadioGroup>
-                //             <Radio value="male">male</Radio>
-                //             <Radio value="female">female</Radio>
-                //         </RadioGroup>
-                //     )}
-                // </FormItem>
-                // <FormItem
-                //     {...formItemLayout}
-                //     label="remarks"
-                //     help="Please input something"
-                //     >
-                //     {getFieldDecorator('remark', { initialValue: '' })(
-                //         <Input type="textarea" placeholder="Please input something" />
-                //     )}
-                // </FormItem>
-                // <FormItem
-                //     {...formItemLayout}
-                //     label={<span>Sold myself <Tooltip title="I come for Qiu Xiang"><Icon type="question-circle-o" /></Tooltip></span>}
-                //     >
-                //     {getFieldDecorator('agreement', { initialValue: false, valuePropName: 'checked' })(
-                //         <Checkbox>agree</Checkbox>
-                //     )}
-                // </FormItem>
-            }
-                 
+               
+                {formItems}
+          
             </Form>
-
-
         );
     }
 }

@@ -1,6 +1,10 @@
 import React, {Component, PropTypes} from 'react';
 import { Form, Input, Row, Col, Button, DatePicker } from 'antd';
-const FormItem = Form.Item;
+
+
+import ControlGenerator from '../../Controls/ControlGenerator';
+
+// const FormItem = Form.Item;
 
 class CoreDataTable_SearchBar extends Component {
 
@@ -33,7 +37,12 @@ class CoreDataTable_SearchBar extends Component {
 
     render() {
         const { getFieldDecorator } = this.props.form;
-        console.log(this.props.columns)
+        console.log(this.props.columns);
+  const formItemLayout = {
+            labelCol: { span: 6 },
+            wrapperCol: { span: 14 },
+        };
+
         return (
             <div style={{ padding: '0px' }}>
                 <Form horizontal className="ant-advanced-search-form" onSubmit={this.formSubmit}>
@@ -41,18 +50,22 @@ class CoreDataTable_SearchBar extends Component {
                         {
                             this.props.columns.map((column) => {
                                 return (
-                                    <Col key={column.dataIndex} span={6} md={4} xs={12}>
-                                        <FormItem key={column.dataIndex}
-                                            label={column.title}
-                                            labelCol={{ span: 10 }}
-                                            wrapperCol={{ span: 14 }}
-                                            >
-                                             {getFieldDecorator(column.dataIndex, { initialValue: '' })(
-                        <Input  placeholder={column.title} size="default"  />
-                    )}
+                            <Col key={column.dataIndex} span={6} md={4} xs={12}>       
+     <ControlGenerator key={"control-" + column.dataIndex} form={this.props.form} fieldInfo={column} {...formItemLayout}></ControlGenerator>
+
+                   </Col>
+                       //                    <Col key={column.dataIndex} span={6} md={4} xs={12}>  <FormItem key={column.dataIndex}
+                    //                         label={column.title}
+                    //                         labelCol={{ span: 10 }}
+                    //                         wrapperCol={{ span: 14 }}
+                    //                         >
+                    //                          {getFieldDecorator(column.dataIndex, { initialValue: '' })(
+                    //     <Input  placeholder={column.title} size="default"  />
+                    // )}
                                            
-                                        </FormItem>
-                                    </Col>);
+                    //                     </FormItem>  </Col>
+             
+                                 );
                             })
                         }
                         <Col span={12}  style={{ textAlign: 'left' }}>
