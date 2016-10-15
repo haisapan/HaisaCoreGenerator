@@ -65,7 +65,7 @@ class CoreDataTable extends Component {
             page: pagination.current,
             sortField: sorter.field,
             sortOrder: sorter.order,
-        ...filters,
+            ...filters,
     });
 };
 
@@ -80,20 +80,20 @@ fetch(params = {}) {
             results: 10,
             ...params,
             },
-type: 'json',
+        type: 'json',
         })
         .then(data => {
-    console.log("表数据", data);
-    const pagination = this.state.pagination;
-    // Read total count from server
-    // pagination.total = data.totalCount;
-    pagination.total = 200;
-    this.setState({
-        loading: false,
-        data: data,
-        pagination,
-    });
-});
+            console.log("表数据", data);
+            const pagination = this.state.pagination;
+            // Read total count from server
+            // pagination.total = data.totalCount;
+            pagination.total = 200;
+            this.setState({
+                loading: false,
+                data: data,
+                pagination,
+            });
+        });
   };
 
 /**
@@ -127,8 +127,8 @@ editItem(){
         return;
     }
 
-var selectEditRowKey=this.state.selectedRowKeys[0];
-var selectEditRow=_.find(this.state.data, {NO: selectEditRowKey});
+    var selectEditRowKey=this.state.selectedRowKeys[0];
+    var selectEditRow=_.find(this.state.data, {NO: selectEditRowKey});
 
     this.setState({ editVisible: true, selectEditRow:selectEditRow, isAdd: false  });
 };
@@ -154,14 +154,20 @@ deleteItem(){
  * 编辑完成
  */
 editFinish(){
-
-    console.log("finish edit");
+    console.log(this.refs.editFormInModal);
+    // this.refs.editFormInModal.getFormData();
+var editRow=this.refs.editFormInModal.getFieldsValue();
+    
+    console.log("finish edit", editRow);
+     
     this.setState({ editVisible: false });
+    this.refs.editFormInModal.resetFields();
 };
 /**
  * 取消编辑
  */
 editCancel(){
+     this.refs.editFormInModal.resetFields();
     this.setState({ editVisible: false });
 }
 
@@ -192,13 +198,11 @@ render() {
             </Row>
 
 
-            <Modal title="编辑" visible={this.state.editVisible}
+            <Modal title="新增/编辑" visible={this.state.editVisible}
                 onOk={this.editFinish.bind(this)} onCancel={this.editCancel.bind(this)}
                 >               
-                 <EditForm fields={this.props.config.columns} initRowData={this.state.selectEditRow} isAdd={this.state.isAdd}></EditForm>               
-
+                 <EditForm ref="editFormInModal" fields={this.props.config.columns} initRowData={this.state.selectEditRow} isAdd={this.state.isAdd}></EditForm>               
             </Modal>
-
 
         </div>
     );
@@ -209,8 +213,4 @@ CoreDataTable.propTypes = {
 
 };
 
-// var DemoForm = Form.create()(CoreDataTable);
-
 export default CoreDataTable;
-
-// ReactDOM.render(<Table columns={columns} dataSource={data} />, mountNode);

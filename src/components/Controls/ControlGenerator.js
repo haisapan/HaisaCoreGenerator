@@ -14,7 +14,7 @@ class ControlGenerator extends Component {
      * 根据传入的config，生成control
      */
     initControl(field) {
-        console.log(field);
+        // console.log(field);
         const { getFieldDecorator } = this.props.form;
         const formItemLayout = {
             labelCol: { span: 6 },
@@ -28,7 +28,7 @@ class ControlGenerator extends Component {
 
                 label={field.title}
                 >
-                {getFieldDecorator(field.dataIndex, { initialValue: field.initValue })(
+                {getFieldDecorator(field.dataIndex, field.initValue?{ initialValue: field.initValue }:{})(
                     <InputNumber />
                 )}
             </FormItem>;
@@ -38,7 +38,7 @@ class ControlGenerator extends Component {
                 {...formItemLayout}
                 label={field.title}
                 >
-                {getFieldDecorator(field.dataIndex, { initialValue: field.initValue })(
+                {getFieldDecorator(field.dataIndex, field.initValue?{ initialValue: field.initValue }:{})(
                     <Input type="text" />
                 )}
             </FormItem>;
@@ -48,7 +48,7 @@ class ControlGenerator extends Component {
                 {...formItemLayout}
                 label={field.title}
                 >
-                {getFieldDecorator(field.dataIndex, { initialValue: field.initValue })(
+                {getFieldDecorator(field.dataIndex, field.initValue?{ initialValue: field.initValue }:{})(
                     <Input type="textarea" />
                 )}
             </FormItem>;
@@ -69,7 +69,7 @@ class ControlGenerator extends Component {
                 {...formItemLayout}
                 label={field.title}
                 >
-                {getFieldDecorator(field.dataIndex, { initialValue: field.initValue })(
+                {getFieldDecorator(field.dataIndex, field.initValue?{ initialValue: field.initValue }:{})(
                     <Select>
                         {options}
                     </Select>
@@ -92,7 +92,7 @@ class ControlGenerator extends Component {
                 {...formItemLayout}
                 label={field.title}
                 >
-                {getFieldDecorator(field.dataIndex, { initialValue: field.initValue })(
+                {getFieldDecorator(field.dataIndex, field.initValue?{ initialValue: field.initValue }:{})(
                     <RadioGroup>
                         {options}
                     </RadioGroup>
@@ -106,7 +106,7 @@ class ControlGenerator extends Component {
                 {...formItemLayout}
                 label={<span>{field.title}</span>}
                 >
-                {getFieldDecorator(field.dataIndex, { initialValue: field.initValue, valuePropName: 'checked' })(
+                {getFieldDecorator(field.dataIndex, field.initValue?{ initialValue: field.initValue, valuePropName: 'checked' }:{})(
                     <Checkbox></Checkbox>
                 )}
             </FormItem>;
@@ -117,7 +117,7 @@ class ControlGenerator extends Component {
                 {...formItemLayout}
                 label={<span>{field.title}</span>}
                 >
-                {getFieldDecorator(field.dataIndex, { initialValue: field.initValue })(
+                {getFieldDecorator(field.dataIndex, field.initValue?{ initialValue: field.initValue }:{})(
                    <DatePicker />
                 )}
             </FormItem>;
@@ -127,7 +127,7 @@ class ControlGenerator extends Component {
                 {...formItemLayout}
                 label={<span>{field.title}</span>}
                 >
-                {getFieldDecorator(field.dataIndex, { initialValue: field.initValue })(
+                {getFieldDecorator(field.dataIndex, field.initValue?{ initialValue: field.initValue }:{})(
                    <TimePicker  />
                 )}
             </FormItem>;
