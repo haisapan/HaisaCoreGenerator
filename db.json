@@ -5,7 +5,7 @@
     "selectable": true,
     "singleSelect": true,
     "enableQuery": true,
-    "queryUrl": "http://localhost:3000/data",
+    "queryUrl": "http://localhost:3000/result",
     "enableAdd": true,
     "addUrl": "http://localhost:3000/coretable",
     "enableEdit": true,
@@ -147,6 +147,8 @@
       }
     ]
   },
+  "result":{
+    "total":11,
   "data": [
     {
       "NO": "001",
@@ -165,6 +167,78 @@
       "NAME": "test3",
       "TYPE": "bad",
       "STATUS": "Closed"
+    },
+    {
+      "NO": 7,
+      "NAME": "afafafg",
+      "StartTime": "Thu Oct 20 2016 21:00:21 GMT+0800",
+      "TYPE": "bad",
+      "SEX": "feman",
+      "STATUS": "",
+      "DESC": "afaf",
+      "id": "0a13a231-9635-4ac6-8be4-a8f5fb6ac58e"
+    },
+    {
+      "NO": 5,
+      "NAME": "test4",
+      "StartTime": "Thu Oct 20 2016 21:02:16 GMT+0800",
+      "TYPE": "notSoCool",
+      "SEX": "feman",
+      "STATUS": "",
+      "DESC": 1.1111111111111112e+28,
+      "id": "314b6173-d265-4fcd-b471-9e60dc774c0c"
+    },
+    {
+      "NO": 9,
+      "NAME": "test6",
+      "StartTime": "Sat Oct 22 2016 21:06:21 GMT+0800",
+      "TYPE": "bad",
+      "SEX": "man",
+      "STATUS": "",
+      "DESC": "remark",
+      "id": "4ff7b156-9138-4a4d-ad0e-adf7491d7366"
+    },
+    {
+      "NO": 11,
+      "NAME": "xx",
+      "StartTime": "Sun Oct 16 2016 21:16:39 GMT+0800",
+      "TYPE": "notSoCool",
+      "SEX": "man",
+      "STATUS": "",
+      "DESC": "xxx",
+      "id": "a11f2b94-0db3-4ec0-b0a9-a59dc0ad9173"
+    },
+    {
+      "NO": 12,
+      "NAME": "xxx",
+      "StartTime": "Tue Nov 01 2016 21:19:18 GMT+0800",
+      "TYPE": "cool",
+      "SEX": "feman",
+      "STATUS": "",
+      "DESC": "thanks",
+      "id": "032d040a-6406-42c2-9071-97afbd7d03c4"
+    },
+    {
+      "NO": 13,
+      "NAME": "test13",
+      "StartTime": "Tue Nov 01 2016 21:26:42 GMT+0800",
+      "TYPE": "notSoCool",
+      "SEX": "feman",
+      "STATUS": "",
+      "DESC": "a",
+      "id": "f64ee4bb-692c-400c-9d08-8d48e9055e7f"
+    },
+    
+    {
+      "NO": 55,
+      "NAME": 55,
+      "StartTime": "Fri Oct 21 2016 21:33:08 GMT+0800",
+      "TYPE": "bad",
+      "SEX": "feman",
+      "STATUS": "",
+      "DESC": 5555,
+      "id": "a34c959c-0d23-4d92-893a-f6355fc18b88"
     }
   ]
+  }
 }

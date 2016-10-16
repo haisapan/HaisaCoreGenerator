@@ -9,29 +9,30 @@ class CoreDataTable_MainTable extends Component {
         this.state = {
             selectedRowKeys: [],  // 这里配置默认勾选列
             data: [],
-            pagination: {
-                showSizeChanger: true,
-                onShowSizeChange(current, pageSize) {
-                    console.log('Current: ', current, '; PageSize: ', pageSize);
-                },
-            },
+            // pagination: {
+            //     total:5,
+            //     showSizeChanger: true,
+            //     onShowSizeChange(current, pageSize) {
+            //         console.log('Current: ', current, '; PageSize: ', pageSize);
+            //     },
+            // },
             loading: false,
         };
 
-        this.handleTableChange = this.handleTableChange.bind(this);
+        // this.handleTableChange = this.handleTableChange.bind(this);
         // this.onSelectChange = this.onSelectChange.bind(this);
 
     };
 
-    handleTableChange(pagination, filters, sorter) {
-        const pager = this.state.pagination;
-        pager.current = pagination.current;
-        this.setState({
-            pagination: pager,
-        });
-        this.props.filterTable(pagination, filters, sorter);
+    // handleTableChange(pagination, filters, sorter) {
+    //     const pager = this.state.pagination;
+    //     pager.current = pagination.current;
+    //     this.setState({
+    //         pagination: pager,
+    //     });
+    //     this.props.filterTable(pagination, filters, sorter);
 
-    };
+    // };
 
     // onSelectChange(selectedRowKeys) {
     //     console.log('selectedRowKeys changed: ', selectedRowKeys);
@@ -56,9 +57,9 @@ class CoreDataTable_MainTable extends Component {
                     rowKey={record => record.NO}
                     dataSource={this.props.dataSource}
                     rowSelection={rowSelection}
-                    pagination={this.state.pagination}
+                    pagination={this.props.pagination}
                     loading={this.state.loading}
-                    onChange={this.handleTableChange}
+                    onChange={this.props.handleTableChange}
                     />
             </div>
         );

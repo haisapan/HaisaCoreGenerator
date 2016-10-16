@@ -4,6 +4,7 @@ import React, { Component, PropTypes } from 'react';
 import { Form, Table, Icon, Card, Row, Modal, Select, Radio } from 'antd';
 import _ from 'lodash';
 import reqwest from 'reqwest';
+import moment from 'moment';
 
 import CoreDataTable_SearchBar from './CoreDataTable_SearchBar/CoreDataTable_SearchBar';
 import CoreDataTable_ToolBar from './CoreDataTable_ToolBar/CoreDataTable_ToolBar';
@@ -13,6 +14,8 @@ import EditForm from './EditForm/index';
 const FormItem = Form.Item;
 const Option = Select.Option;
 const RadioGroup = Radio.Group;
+
+
 
 /**CoreDataTable组件，根据config自动生成页面
  * 使用：<CoreDataTable config={tableConfig.coreTable}></CoreDataTable>
@@ -32,10 +35,19 @@ class CoreDataTable extends Component {
         this.deleteItem = this.deleteItem.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
         this.resetFormToEmpty = this.resetFormToEmpty.bind(this);
+                this.handleTableChange = this.handleTableChange.bind(this);
 
         /**设置state */
         this.state = {
-            pagination: {},  //分页信息
+            // pagination: {},  //分页信息
+            pagination: {
+                total:0,
+                pageSizeOptions:["5","10","20","50","100"],
+                showSizeChanger: true,
+                onShowSizeChange(current, pageSize) {
+                    console.log('Current: ', current, '; PageSize: ', pageSize);
+                },
+            },
             editVisible: false, //编辑框是否可见，目前为modal内编辑，后续支持行内编辑
             selectedRowKeys: [],
             selectEditRow: null,
@@ -57,11 +69,21 @@ class CoreDataTable extends Component {
         this.setState({ selectedRowKeys });
     };
 
+    handleTableChange(pagination, filters, sorter) {
+        const pager = this.state.pagination;
+        pager.current = pagination.current;
+        this.setState({
+            pagination: pager,
+        });
+        this.filterTable(pagination, filters, sorter);
+
+    };
+
     /**查询表格数据 */
     filterTable(pagination = {}, filters, sorter = {}) {
         // debugger;
         this.fetch({
-            pageSize: pagination.pageSize || 10,
+            pageSize: pagination.pageSize || 5,
             page: pagination.current || 1,
             sortField: sorter.field,
             sortOrder: sorter.order,
@@ -83,15 +105,15 @@ fetch(params = {}) {
             },
 type: 'json',
         })
-        .then(data => {
-    console.log("表数据", data);
+        .then(result => {
+    console.log("表数据", result);
     const pagination = this.state.pagination;
     // Read total count from server
     // pagination.total = data.totalCount;
-    pagination.total = 200;
+    pagination.total = result.total;
     this.setState({
         loading: false,
-        dataSource: data,
+        dataSource: result.data,  //TODO改成result.data
         pagination,
     });
 });
@@ -109,11 +131,16 @@ addRow(rowData = {}) {
     })
         .then(result => {
             console.log("创建成功", result);
+// this.state.dataSource[0]=rowData;
+// this.state.dataSource.splice(this.state.dataSource.length-1,1);
+this.state.dataSource=_.dropRight(this.state.dataSource,1);
+this.state.dataSource.splice(0,0, rowData);
+// this.state.dataSource=_.tail(this.state.dataSource);
 
             this.setState({
                 loading: false,
-                dataSource: this.state.dataSource.push(rowData),
-                pagination,
+                dataSource: this.state.dataSource
+           
             });
             // const pagination = this.state.pagination;
             // // Read total count from server
@@ -214,6 +241,15 @@ editItem(){
 
     var selectEditRowKey = this.state.selectedRowKeys[0];
     var selectEditRow = _.find(this.state.dataSource, { NO: selectEditRowKey });
+
+    //DatePicker的时间必须转换为moment格式
+    for (var i = 0; i < this.props.config.columns.length; i++) {
+        var column = this.props.config.columns[i];
+        if(column.controlType=="datepicker"){
+            selectEditRow[column.dataIndex]=moment(selectEditRow[column.dataIndex]);
+        }
+        
+    }
 
     //  第一次setFieldsValue的时候，Modal还没渲染，所以要在setState中的回调函数里调用
     this.setState({ editVisible: true }, () => {
@@ -317,8 +353,10 @@ render() {
                         filterTable={this.filterTable}
                         columns={this.props.config.columns}
                         dataSource={this.state.dataSource}
+                        pagination={this.state.pagination}
                         selectedRowKeys={this.state.selectedRowKeys}
                         onSelectChange={this.onSelectChange}
+                        handleTableChange={this.handleTableChange}
                         >
                     </CoreDataTable_MainTable>
                 </Card>

@@ -126,12 +126,13 @@ class ControlGenerator extends Component {
 
         /**日期选择 */
         if (field.controlType == "datepicker") {
+            const format = 'YYYY/MM/DD';
             return <FormItem
                 {...formItemLayout}
                 label={<span>{field.title}</span>}
                 >
                 {getFieldDecorator(field.dataIndex)(
-                   <DatePicker />
+                   <DatePicker format={format} />
                 )}
             </FormItem>;
         }
