@@ -3,11 +3,11 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "webpack-dev-server --devtool  --progress --colors --history-api-fallback  --content-base  .",
-    "build_dll":"webpack --progress --colors --config ./webpack.dll.config.js",
+    "build_dll": "webpack --progress --colors --config ./webpack.dll.config.js",
     "start": "node server.js"
   },
   "dependencies": {
-    "antd": "^2.0.1",
+    "antd": "^2.1.0",
     "jquery": "^3.1.0",
     "jwt-decode": "^2.1.0",
     "lodash": "^4.16.1",
