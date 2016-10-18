@@ -6,9 +6,9 @@ import _ from 'lodash';
 import reqwest from 'reqwest';
 import moment from 'moment';
 
-import CoreDataTable_SearchBar from './CoreDataTable_SearchBar/CoreDataTable_SearchBar';
-import CoreDataTable_ToolBar from './CoreDataTable_ToolBar/CoreDataTable_ToolBar';
-import CoreDataTable_MainTable from './CoreDataTable_MainTable/CoreDataTable_MainTable';
+import CoreDataTable_SearchBar from './SearchBar/SearchBar';
+import CoreDataTable_ToolBar from './ToolBar/ToolBar';
+import CoreDataTable_MainTable from './MainTable/MainTable';
 import EditForm from './EditForm/index';
 
 const FormItem = Form.Item;
