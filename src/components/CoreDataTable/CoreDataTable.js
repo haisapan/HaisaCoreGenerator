@@ -90,7 +90,7 @@ class CoreDataTable extends Component {
     filterTable(pagination = {}, filters, sorter = {}) {
         // debugger;
         this.fetch({
-            pageSize: pagination.pageSize || 5,
+            pageSize: pagination.pageSize || 10,
             page: pagination.current || 1,
             sortField: sorter.field,
             sortOrder: sorter.order,
@@ -122,6 +122,8 @@ type: 'json',
         loading: false,
         dataSource: result.data,  //TODO改成result.data
         pagination,
+        selectedRowKeys: [],  //再次load数据时清空已选择的行
+        selectEditRow: null,
     });
 });
   };
@@ -130,7 +132,7 @@ addRow(rowData = {}) {
     console.log('创建：', rowData);
 
     reqwest({
-        url: this.props.config.queryUrl,
+        url: this.props.config.addUrl || this.props.config.queryUrl,
         method: 'post',
         crossOrigin: true,
         data: rowData,
@@ -143,7 +145,10 @@ addRow(rowData = {}) {
             this.state.dataSource = _.dropRight(this.state.dataSource, 1);
             this.state.dataSource.splice(0, 0, rowData);
             // this.state.dataSource=_.tail(this.state.dataSource);
-
+            Modal.success({
+                title: '提示',
+                content: '更新成功!',
+            });
             this.setState({
                 loading: false,
                 dataSource: this.state.dataSource
@@ -159,7 +164,7 @@ addRow(rowData = {}) {
             //     pagination,
             // });
         })
-        .catch((err) => {
+        .fail((err) => {
             Modal.error({
                 title: '错误',
                 content: '添加失败',
@@ -171,7 +176,7 @@ updateRow(rowData = {}) {
     console.log('创建：', rowData);
 
     reqwest({
-        url: this.props.config.queryUrl,
+        url: this.props.config.editUrl || this.props.config.queryUrl,
         method: 'put',
         crossOrigin: true,
         data: rowData,
@@ -179,7 +184,10 @@ updateRow(rowData = {}) {
     })
         .then(data => {
             console.log("更新成功", data);
-
+            Modal.success({
+                title: '提示',
+                content: '更新成功',
+            });
             // const pagination = this.state.pagination;
             // // Read total count from server
             // // pagination.total = data.totalCount;
@@ -190,7 +198,7 @@ updateRow(rowData = {}) {
             //     pagination,
             // });
         })
-        .catch((err) => {
+        .fail((err) => {
             Modal.error({
                 title: '错误',
                 content: '更新失败',
@@ -259,7 +267,7 @@ editItem(){
     }
 
     //  第一次setFieldsValue的时候，Modal还没渲染，所以要在setState中的回调函数里调用
-    this.setState({ editVisible: true }, () => {
+    this.setState({ editVisible: true, isAdd: false }, () => {
         //console.log("after setState, if the modal show?");
         this.refs.editFormInModal.setFieldsValue(selectEditRow);
 
@@ -289,15 +297,18 @@ deleteItem(){
     console.log("delete", this.state.selectedRowKeys);
     //TODO AJAX发送到后台API
     reqwest({
-        url: this.props.config.queryUrl,
+        url: this.props.config.deleteUrl || this.props.config.queryUrl,
         method: 'delete',
         crossOrigin: true,
         data: { deleteKeys: this.state.selectedRowKeys },
-        type: 'json',
+        // type: 'json',
     })
-        .then(data => {
-            console.log("删除成功", data);
-
+        .then(() => {
+            console.log("删除成功");
+            Modal.success({
+                title: '提示',
+                content: '删除成功',
+            });
             // const pagination = this.state.pagination;
             // // Read total count from server
             // // pagination.total = data.totalCount;
@@ -308,7 +319,8 @@ deleteItem(){
             //     pagination,
             // });
         })
-        .catch((err) => {
+        .fail((err) => {
+            debugger;
             Modal.error({
                 title: '错误',
                 content: '删除失败',
