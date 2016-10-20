@@ -17,9 +17,16 @@ const RadioGroup = Radio.Group;
 
 
 
-/**CoreDataTable组件，根据config自动生成页面
- * 使用：<CoreDataTable config={tableConfig.coreTable}></CoreDataTable>
- * config数据示例见： db.json
+/** CoreDataTable组件，根据config自动生成页面
+ * 
+ *  使用：<CoreDataTable config={tableConfig.coreTable}></CoreDataTable>
+ *  config数据示例见： db.json
+ *  •可以传递CoreTable的props 到antd Table来实现定制
+ *  部分Props说明：
+ *  •∷pagination: true/false/paginiation配置  。配置不同的时候，数据源不同，但是要求前台支持True/False两种模式
+ *  •∷ToolBarExtension  =<div>ToolBar拓展</div>
+ *  •∷SearchBarExtension  =<div>SearchBar拓展</div> 
+ *  •∷
  */
 class CoreDataTable extends Component {
 
@@ -35,14 +42,14 @@ class CoreDataTable extends Component {
         this.deleteItem = this.deleteItem.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
         this.resetFormToEmpty = this.resetFormToEmpty.bind(this);
-                this.handleTableChange = this.handleTableChange.bind(this);
+        this.handleTableChange = this.handleTableChange.bind(this);
 
         /**设置state */
         this.state = {
             // pagination: {},  //分页信息
             pagination: {
-                total:0,
-                pageSizeOptions:["5","10","20","50","100"],
+                total: 0,
+                pageSizeOptions: ["5", "10", "20", "50", "100"],
                 showSizeChanger: true,
                 onShowSizeChange(current, pageSize) {
                     console.log('Current: ', current, '; PageSize: ', pageSize);
@@ -131,16 +138,16 @@ addRow(rowData = {}) {
     })
         .then(result => {
             console.log("创建成功", result);
-// this.state.dataSource[0]=rowData;
-// this.state.dataSource.splice(this.state.dataSource.length-1,1);
-this.state.dataSource=_.dropRight(this.state.dataSource,1);
-this.state.dataSource.splice(0,0, rowData);
-// this.state.dataSource=_.tail(this.state.dataSource);
+            // this.state.dataSource[0]=rowData;
+            // this.state.dataSource.splice(this.state.dataSource.length-1,1);
+            this.state.dataSource = _.dropRight(this.state.dataSource, 1);
+            this.state.dataSource.splice(0, 0, rowData);
+            // this.state.dataSource=_.tail(this.state.dataSource);
 
             this.setState({
                 loading: false,
                 dataSource: this.state.dataSource
-           
+
             });
             // const pagination = this.state.pagination;
             // // Read total count from server
@@ -152,8 +159,8 @@ this.state.dataSource.splice(0,0, rowData);
             //     pagination,
             // });
         })
-        .catch((err)=>{
-             Modal.error({
+        .catch((err) => {
+            Modal.error({
                 title: '错误',
                 content: '添加失败',
             });
@@ -183,8 +190,8 @@ updateRow(rowData = {}) {
             //     pagination,
             // });
         })
-            .catch((err)=>{
-             Modal.error({
+        .catch((err) => {
+            Modal.error({
                 title: '错误',
                 content: '更新失败',
             });
@@ -245,10 +252,10 @@ editItem(){
     //DatePicker的时间必须转换为moment格式
     for (var i = 0; i < this.props.config.columns.length; i++) {
         var column = this.props.config.columns[i];
-        if(column.controlType=="datepicker"){
-            selectEditRow[column.dataIndex]=moment(selectEditRow[column.dataIndex]);
+        if (column.controlType == "datepicker") {
+            selectEditRow[column.dataIndex] = moment(selectEditRow[column.dataIndex]);
         }
-        
+
     }
 
     //  第一次setFieldsValue的时候，Modal还没渲染，所以要在setState中的回调函数里调用
@@ -300,9 +307,9 @@ deleteItem(){
             //     data: data,
             //     pagination,
             // });
-        }) 
-          .catch((err)=>{
-             Modal.error({
+        })
+        .catch((err) => {
+            Modal.error({
                 title: '错误',
                 content: '删除失败',
             });
