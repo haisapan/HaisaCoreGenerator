@@ -4,7 +4,7 @@ import { Link, IndexLink } from 'react-router';
 
 import CoreDataTable from '../CoreDataTable/CoreDataTable';
 
-import tableConfig from '../../../db.json';
+import tableConfig from '../../../coreTable-config.json';
 
 const App = React.createClass({
     getInitialState() {
@@ -27,16 +27,6 @@ const App = React.createClass({
         if (!this.isMounted()) {
             return;
         }
-        // setTimeout(() => {
-        //     var columns = [{
-        //         field: 'NO',
-        //         title: '编号'
-        //     }, {
-        //             field: 'NAME',
-        //             title: '名称'
-        //         }];
-        //     this.setState({ columns: columns });
-        // }, 5000);
     },
     changeName(item) {
         console.log(item);

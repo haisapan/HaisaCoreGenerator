@@ -9,12 +9,11 @@ import moment from 'moment';
 import CoreDataTable_SearchBar from './SearchBar/SearchBar';
 import CoreDataTable_ToolBar from './ToolBar/ToolBar';
 import CoreDataTable_MainTable from './MainTable/MainTable';
-import EditForm from './EditForm/index';
+import EditForm from './EditForm/EditForm';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
 const RadioGroup = Radio.Group;
-
 
 
 /** CoreDataTable组件，根据config自动生成页面
@@ -28,6 +27,7 @@ const RadioGroup = Radio.Group;
  *  •∷SearchBarExtension  =<div>SearchBar拓展</div> 
  *  •∷
  */
+
 class CoreDataTable extends Component {
 
     constructor(props) {
@@ -40,6 +40,7 @@ class CoreDataTable extends Component {
         this.addNewItem = this.addNewItem.bind(this);
         this.editItem = this.editItem.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
+        
         this.onSelectChange = this.onSelectChange.bind(this);
         this.resetFormToEmpty = this.resetFormToEmpty.bind(this);
         this.handleTableChange = this.handleTableChange.bind(this);
