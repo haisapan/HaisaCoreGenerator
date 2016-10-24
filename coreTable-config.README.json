@@ -1,33 +1,33 @@
 {
   "coreTable": {
-    "name": "coreTable",
-    "title": "cool table generated ",
-    "selectable": true,
-    "singleSelect": false,
-    "enableQuery": true,
-    "showToolBar": true,
-    "queryUrl": "http://localhost:7001/api/coretable",
-    "enableAdd": true,
+    "name": "coreTable",   //MainTable Id
+    "title": "cool table generated ",  //MainTable title
+    "selectable": true,  //can be selected?
+    "singleSelect": true, //single Select?  ->TODO
+    "enableQuery": true,  //是否可以查询
+    "showToolBar": true, //是否显示ToolBar
+    "queryUrl": "http://localhost:7001/api/coretable",  //查询的Url
+    "enableAdd": true,            //是否可以添加
     "addUrl": "http://localhost:7001/api/coretable",
-    "enableEdit": true,
+    "enableEdit": true,   //是否可以修改
     "editUrl": "http://localhost:7001/api/coretable",
-    "editWay": "inline",
-    "enableDelete": true,
+    "editWay": "inline",  //修改的方式，行内编辑还是Modal中编辑？ 暂时不起作用，强制为Modal     ->TODO
+    "enableDelete": true, //是否可以删除
     "deleteUrl": "http://localhost:7001/api/coretable",
-    "autoHeight": true,
+    "autoHeight": true, //高宽   ->TODO
     "height": 500,
     "autoWidth": true,
     "width": 800,
-    "hasChildTable": true,
-    "childTableComponentName": "coreChildTable",
-    "toolbar": {
+    "hasChildTable": true,  //是否有级联表，  ->TODO
+    "childTableComponentName": "coreChildTable",  //级联表ID 及ref  ->TODO
+    "toolbar": {    //ToolBar ->TODO
       "otherButtons": [
         {
           "name": "publish"
         }
       ]
     },
-    "columns": [
+    "columns": [  //  列 ->TODO
       {
         "dataIndex": "NO",
         "title": "编号",
@@ -35,7 +35,7 @@
         "isLinkUrl": true,
         "LinkUrl": "_self",
         "isRefKey": false,
-        "hide": false,
+        "hide": true,
         "canQuery": true,
         "canEdit": false,
         "controlType": "number",
@@ -49,7 +49,7 @@
         "isRefKey": false,
         "hide": false,
         "canQuery": true,
-        "canEdit": true,
+        "canEdit": false,
         "controlType": "text",
         "controlBasicInfo": {}
       },
@@ -61,7 +61,7 @@
         "isRefKey": false,
         "hide": false,
         "canQuery": true,
-        "canEdit": true,
+        "canEdit": false,
         "controlType": "datepicker",
         "controlBasicInfo": {}
       },
@@ -73,7 +73,7 @@
         "isRefKey": false,
         "hide": false,
         "canQuery": true,
-        "canEdit": true,
+        "canEdit": false,
         "controlType": "select",
         "controlBasicInfo": {
           "items": [
@@ -103,7 +103,7 @@
         "isRefKey": false,
         "hide": false,
         "canQuery": true,
-        "canEdit": true,
+        "canEdit": false,
         "controlType": "radio",
         "controlBasicInfo": {
           "items": [
@@ -128,7 +128,7 @@
         "isRefKey": false,
         "hide": false,
         "canQuery": true,
-        "canEdit": true,
+        "canEdit": false,
         "controlType": "select",
         "controlBasicInfo": {
           "dataUrl": "http://localhost:3001/getAllStatus"
@@ -142,7 +142,7 @@
         "isRefKey": false,
         "hide": false,
         "canQuery": true,
-        "canEdit": true,
+        "canEdit": false,
         "controlType": "textarea",
         "controlBasicInfo": {}
       }

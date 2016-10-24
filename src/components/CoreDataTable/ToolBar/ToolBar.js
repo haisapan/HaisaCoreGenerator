@@ -19,11 +19,26 @@ class componentName extends Component {
             <div className="toolbar" data-desc="toolBar">
 
                 <span className="button-group">
+                {
+                    this.props.enableAdd?
                     <Button type="primary" onClick={this.props.addNewItem}>新增</Button>
+                    :null
+                }
+                    
+                     {
+                    this.props.enableEdit?
                     <Button type="primary" style={{ backgroundColor: 'red' }} onClick={this.props.editItem}>修改</Button>
+                    :null
+                }
+                  {
+                    this.props.enableDelete?
                     <Popconfirm title="确定要删除记录?" onConfirm={this.props.deleteItem} okText="Yes" cancelText="No">
                         <Button type="ghost" >删除</Button>
                     </Popconfirm>
+                    :null
+                }
+                    
+                    
                 </span>
                 {
                     // <div className="ui vertical divider"></div>

@@ -40,7 +40,7 @@ class CoreDataTable extends Component {
         this.addNewItem = this.addNewItem.bind(this);
         this.editItem = this.editItem.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
-        
+
         this.onSelectChange = this.onSelectChange.bind(this);
         this.resetFormToEmpty = this.resetFormToEmpty.bind(this);
         this.handleTableChange = this.handleTableChange.bind(this);
@@ -360,16 +360,26 @@ render() {
 
     // var CoreDataTable_SearchBarForm = Form.create()(CoreDataTable_SearchBar);
     return (
-        <div className="core-table">
+        <div className="core-table" id={this.props.config.name}
+            title={this.props.config.title} >
             <Row>
                 <Card span="20">
-                    <Card>
-                        <CoreDataTable_SearchBar columns={this.props.config.columns} filterTable={this.filterTable}></CoreDataTable_SearchBar>
-                    </Card>
+                    {this.props.config.enableQuery ?
+                        <Card>
+                            <CoreDataTable_SearchBar columns={this.props.config.columns} filterTable={this.filterTable}></CoreDataTable_SearchBar>
+                        </Card>
+                        : null
+                    }
+
                     {
-                        <CoreDataTable_ToolBar {...this.toolBarFunc}></CoreDataTable_ToolBar>
+                        this.props.config.showToolBar ?
+                            <CoreDataTable_ToolBar {...this.toolBarFunc} {...this.props.config}></CoreDataTable_ToolBar>
+                            : null
                     }
                     <CoreDataTable_MainTable
+                        {...this.props.config}
+                        id={this.props.config.name}
+                        title={this.props.config.title}
                         filterTable={this.filterTable}
                         columns={this.props.config.columns}
                         dataSource={this.state.dataSource}

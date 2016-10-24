@@ -12,6 +12,9 @@ class EditForm extends Component {
 
     render() {
         var formItems = this.props.fields.map((field) => {
+            if(!field.canEdit){
+                return null;
+            }
             return <ControlGenerator key={"control-" + field.dataIndex} form={this.props.form} fieldInfo={field} ></ControlGenerator>
 
         });

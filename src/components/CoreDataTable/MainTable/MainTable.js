@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Table, Input } from 'antd';
-
+import _ from 'lodash';
 import reqwest from 'reqwest';
 
 class CoreDataTable_MainTable extends Component {
@@ -46,14 +46,20 @@ class CoreDataTable_MainTable extends Component {
 
     render() {
         // console.log(this.props);
-        const rowSelection = {
+        
+        const rowSelection = this.props.selectable?{
             selectedRowKeys: this.props.selectedRowKeys,
             onChange: this.props.onSelectChange,
-        };
+        }
+        :null;
+
+        var columns=_.filter(this.props.columns, function(column){
+            return !column.hide;
+        });
 
         return (
             <div>
-                <Table columns={this.props.columns} bordered={true}
+                <Table columns={columns} bordered={true}
                     rowKey={record => record.NO}
                     dataSource={this.props.dataSource}
                     rowSelection={rowSelection}
