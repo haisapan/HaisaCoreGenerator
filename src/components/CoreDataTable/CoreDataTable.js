@@ -58,7 +58,7 @@ class CoreDataTable extends Component {
             },
             editVisible: false, //编辑框是否可见，目前为modal内编辑，后续支持行内编辑
             selectedRowKeys: [],
-            selectEditRow: null,
+            // selectEditRow: null,
             isAdd: true
         };
 
@@ -68,6 +68,9 @@ class CoreDataTable extends Component {
             editItem: this.editItem,
             deleteItem: this.deleteItem
         };
+
+        /**current Edit Row */
+        this.currentEditRow=null;
 
     };
 
@@ -124,7 +127,7 @@ type: 'json',
         dataSource: result.data,  //TODO改成result.data
         pagination,
         selectedRowKeys: [],  //再次load数据时清空已选择的行
-        selectEditRow: null,
+        // selectEditRow: null,
     });
 });
   };
@@ -213,7 +216,7 @@ updateRow(rowData = {}) {
 addNewItem(){
     console.log("add new", this.refs.editFormInModal);
     this.resetFormToEmpty();
-    this.setState({ editVisible: true, selectEditRow: {}, isAdd: true });  //TODO 是不是可以通过selectEditRow is null来控制是新增还是编辑
+    this.setState({ editVisible: true, isAdd: true });  //TODO 是不是可以通过selectEditRow is null来控制是新增还是编辑
 };
 
 /**
@@ -258,6 +261,8 @@ editItem(){
     var selectEditRowKey = this.state.selectedRowKeys[0];
     var selectEditRow = _.find(this.state.dataSource, { NO: selectEditRowKey });
 
+
+
     //DatePicker的时间必须转换为moment格式
     for (var i = 0; i < this.props.config.columns.length; i++) {
         var column = this.props.config.columns[i];
@@ -266,6 +271,8 @@ editItem(){
         }
 
     }
+
+    this.currentEditRow=selectEditRow;   //暂存当前编辑的行数据
 
     //  第一次setFieldsValue的时候，Modal还没渲染，所以要在setState中的回调函数里调用
     this.setState({ editVisible: true, isAdd: false }, () => {
@@ -336,6 +343,7 @@ editFinish(){
 
     var editRow = this.refs.editFormInModal.getFieldsValue();
 
+
     console.log("finish edit", editRow);
     this.setState({ editVisible: false });
 
@@ -343,6 +351,7 @@ editFinish(){
     if (this.state.isAdd) {
         this.addRow(editRow);
     } else {
+        editRow.NO=this.currentEditRow.NO;
         this.updateRow(editRow);
     }
 
@@ -354,6 +363,7 @@ editFinish(){
 editCancel(){
     // this.resetFormToEmpty();
     this.setState({ editVisible: false });
+    this.currentEditRow=null;
 }
 
 render() {
@@ -396,7 +406,7 @@ render() {
             <Modal title="新增/编辑" visible={this.state.editVisible}
                 onOk={this.editFinish.bind(this)} onCancel={this.editCancel.bind(this)}
                 >
-                <EditForm ref="editFormInModal" fields={this.props.config.columns} initRowData={this.state.selectEditRow} isAdd={this.state.isAdd}></EditForm>
+                <EditForm ref="editFormInModal" fields={this.props.config.columns}  isAdd={this.state.isAdd}></EditForm>
             </Modal>
 
         </div>

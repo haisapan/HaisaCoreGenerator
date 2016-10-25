@@ -35,11 +35,11 @@
         "isLinkUrl": true,
         "LinkUrl": "_self",
         "isRefKey": false,
-        "hide": true,
-        "canQuery": true,
-        "canEdit": false,
-        "controlType": "number",
-        "controlBasicInfo": {}
+        "hide": true,   //是否在表格中隐藏
+        "canQuery": true,   //在搜索框中启用
+        "canEdit": false,   //在编辑框中启用
+        "controlType": "number",  //控件类型
+        "controlBasicInfo": {}  //控件的一些基础信息
       },
       {
         "dataIndex": "NAME",
