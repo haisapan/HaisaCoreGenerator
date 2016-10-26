@@ -4,6 +4,7 @@
     "title": "cool table generated ",
     "selectable": true,
     "singleSelect": false,
+	"pagination":false,
     "enableQuery": true,
     "showToolBar": true,
     "queryUrl": "http://localhost:7001/api/coretable",

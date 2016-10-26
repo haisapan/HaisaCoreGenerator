@@ -1,5 +1,3 @@
-// import {DataTable } from 'antd/lib/';
-// import 'antd/dist/antd.css'; 
 import React, { Component, PropTypes } from 'react';
 import { Form, Table, Icon, Card, Row, Modal, Select, Radio } from 'antd';
 import _ from 'lodash';
@@ -47,15 +45,15 @@ class CoreDataTable extends Component {
 
         /**设置state */
         this.state = {
-            // pagination: {},  //分页信息
-            pagination: {
+            pagination: this.props.config.pagination ? {
                 total: 0,
                 pageSizeOptions: ["5", "10", "20", "50", "100"],
                 showSizeChanger: true,
                 onShowSizeChange(current, pageSize) {
                     console.log('Current: ', current, '; PageSize: ', pageSize);
                 },
-            },
+            }
+                : false,
             editVisible: false, //编辑框是否可见，目前为modal内编辑，后续支持行内编辑
             selectedRowKeys: [],
             // selectEditRow: null,
@@ -69,8 +67,8 @@ class CoreDataTable extends Component {
             deleteItem: this.deleteItem
         };
 
-        /**current Edit Row */
-        this.currentEditRow=null;
+        /**当前编辑行的相关数据 */
+        this.currentEditRow = null;
 
     };
 
@@ -81,8 +79,11 @@ class CoreDataTable extends Component {
     };
 
     handleTableChange(pagination, filters, sorter) {
-        const pager = this.state.pagination;
-        pager.current = pagination.current;
+        if (this.state.pagination) {
+            const pager = this.state.pagination;
+            pager.current = pagination.current;
+        }
+
         this.setState({
             pagination: pager,
         });
@@ -92,10 +93,15 @@ class CoreDataTable extends Component {
 
     /**查询表格数据 */
     filterTable(pagination = {}, filters, sorter = {}) {
-        // debugger;
+        var paginationSetting = {};
+        if (this.state.pagination) {
+            paginationSetting = {
+                pageSize: pagination.pageSize || 10,
+                page: pagination.current || 1
+            };
+        };
         this.fetch({
-            pageSize: pagination.pageSize || 10,
-            page: pagination.current || 1,
+           ...paginationSetting,
             sortField: sorter.field,
             sortOrder: sorter.order,
             ...filters,
@@ -111,7 +117,6 @@ fetch(params = {}) {
         method: 'get',
         crossOrigin: true,
         data: {
-            // results: 10,
             ...params,
             },
 type: 'json',
@@ -119,15 +124,15 @@ type: 'json',
         .then(result => {
     console.log("表数据", result);
     const pagination = this.state.pagination;
-    // Read total count from server
-    // pagination.total = data.totalCount;
-    pagination.total = result.total;
+    if (this.state.pagination) {
+        pagination.total = result.total;
+    }
+
     this.setState({
         loading: false,
         dataSource: result.data,  //TODO改成result.data
         pagination,
         selectedRowKeys: [],  //再次load数据时清空已选择的行
-        // selectEditRow: null,
     });
 });
   };
@@ -144,11 +149,8 @@ addRow(rowData = {}) {
     })
         .then(result => {
             console.log("创建成功", result);
-            // this.state.dataSource[0]=rowData;
-            // this.state.dataSource.splice(this.state.dataSource.length-1,1);
             this.state.dataSource = _.dropRight(this.state.dataSource, 1);
             this.state.dataSource.splice(0, 0, rowData);
-            // this.state.dataSource=_.tail(this.state.dataSource);
             Modal.success({
                 title: '提示',
                 content: '更新成功!',
@@ -156,17 +158,7 @@ addRow(rowData = {}) {
             this.setState({
                 loading: false,
                 dataSource: this.state.dataSource
-
             });
-            // const pagination = this.state.pagination;
-            // // Read total count from server
-            // // pagination.total = data.totalCount;
-            // pagination.total = 200;
-            // this.setState({
-            //     loading: false,
-            //     data: data,
-            //     pagination,
-            // });
         })
         .fail((err) => {
             Modal.error({
@@ -192,15 +184,6 @@ updateRow(rowData = {}) {
                 title: '提示',
                 content: '更新成功',
             });
-            // const pagination = this.state.pagination;
-            // // Read total count from server
-            // // pagination.total = data.totalCount;
-            // pagination.total = 200;
-            // this.setState({
-            //     loading: false,
-            //     data: data,
-            //     pagination,
-            // });
         })
         .fail((err) => {
             Modal.error({
@@ -272,22 +255,17 @@ editItem(){
 
     }
 
-    this.currentEditRow=selectEditRow;   //暂存当前编辑的行数据
+    this.currentEditRow = selectEditRow;   //暂存当前编辑的行数据
 
     //  第一次setFieldsValue的时候，Modal还没渲染，所以要在setState中的回调函数里调用
     this.setState({ editVisible: true, isAdd: false }, () => {
-        //console.log("after setState, if the modal show?");
         this.refs.editFormInModal.setFieldsValue(selectEditRow);
-
     });
 
 
 };
 
 
-// confirmDelete(){
-//     this.deleteItem();
-// };
 /**
  * 删除
  */
@@ -317,15 +295,6 @@ deleteItem(){
                 title: '提示',
                 content: '删除成功',
             });
-            // const pagination = this.state.pagination;
-            // // Read total count from server
-            // // pagination.total = data.totalCount;
-            // pagination.total = 200;
-            // this.setState({
-            //     loading: false,
-            //     data: data,
-            //     pagination,
-            // });
         })
         .fail((err) => {
             debugger;
@@ -351,7 +320,7 @@ editFinish(){
     if (this.state.isAdd) {
         this.addRow(editRow);
     } else {
-        editRow.NO=this.currentEditRow.NO;
+        editRow.NO = this.currentEditRow.NO;
         this.updateRow(editRow);
     }
 
@@ -363,12 +332,11 @@ editFinish(){
 editCancel(){
     // this.resetFormToEmpty();
     this.setState({ editVisible: false });
-    this.currentEditRow=null;
+    this.currentEditRow = null;
 }
 
 render() {
 
-    // var CoreDataTable_SearchBarForm = Form.create()(CoreDataTable_SearchBar);
     return (
         <div className="core-table" id={this.props.config.name}
             title={this.props.config.title} >
@@ -406,7 +374,7 @@ render() {
             <Modal title="新增/编辑" visible={this.state.editVisible}
                 onOk={this.editFinish.bind(this)} onCancel={this.editCancel.bind(this)}
                 >
-                <EditForm ref="editFormInModal" fields={this.props.config.columns}  isAdd={this.state.isAdd}></EditForm>
+                <EditForm ref="editFormInModal" fields={this.props.config.columns} isAdd={this.state.isAdd}></EditForm>
             </Modal>
 
         </div>
