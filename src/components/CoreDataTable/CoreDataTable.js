@@ -45,18 +45,16 @@ class CoreDataTable extends Component {
 
         /**设置state */
         this.state = {
-            pagination: this.props.config.pagination ? {
+            pagination: !this.props.config.pagination ?false: {
                 total: 0,
                 pageSizeOptions: ["5", "10", "20", "50", "100"],
                 showSizeChanger: true,
                 onShowSizeChange(current, pageSize) {
                     console.log('Current: ', current, '; PageSize: ', pageSize);
                 },
-            }
-                : false,
+            },
             editVisible: false, //编辑框是否可见，目前为modal内编辑，后续支持行内编辑
             selectedRowKeys: [],
-            // selectEditRow: null,
             isAdd: true
         };
 
@@ -79,8 +77,8 @@ class CoreDataTable extends Component {
     };
 
     handleTableChange(pagination, filters, sorter) {
-        if (this.state.pagination) {
-            const pager = this.state.pagination;
+        var pager=this.state.pagination;
+        if (this.state.pagination) {           
             pager.current = pagination.current;
         }
 
@@ -92,7 +90,11 @@ class CoreDataTable extends Component {
     };
 
     /**查询表格数据 */
-    filterTable(pagination = {}, filters, sorter = {}) {
+    filterTable(pagination = {}, filters={}, sorter = {}) {
+
+        var filterItems=this.refs.coretable_searchbar.getFieldsValue();  //当前searchbar的查询条件
+        filters={...filters, ...filterItems};
+
         var paginationSetting = {};
         if (this.state.pagination) {
             paginationSetting = {
@@ -149,16 +151,18 @@ addRow(rowData = {}) {
     })
         .then(result => {
             console.log("创建成功", result);
-            this.state.dataSource = _.dropRight(this.state.dataSource, 1);
-            this.state.dataSource.splice(0, 0, rowData);
+            // this.state.dataSource = _.dropRight(this.state.dataSource, 1);
+            // this.state.dataSource.splice(0, 0, rowData);
+            this.filterTable();
             Modal.success({
                 title: '提示',
-                content: '更新成功!',
+                content: '添加成功!',
             });
-            this.setState({
-                loading: false,
-                dataSource: this.state.dataSource
-            });
+            
+            // this.setState({
+            //     loading: false,
+            //     dataSource: this.state.dataSource
+            // });
         })
         .fail((err) => {
             Modal.error({
@@ -291,10 +295,12 @@ deleteItem(){
     })
         .then(() => {
             console.log("删除成功");
+            this.filterTable();
             Modal.success({
                 title: '提示',
                 content: '删除成功',
             });
+            
         })
         .fail((err) => {
             debugger;
@@ -344,7 +350,7 @@ render() {
                 <Card span="20">
                     {this.props.config.enableQuery ?
                         <Card>
-                            <CoreDataTable_SearchBar columns={this.props.config.columns} filterTable={this.filterTable}></CoreDataTable_SearchBar>
+                            <CoreDataTable_SearchBar ref="coretable_searchbar" columns={this.props.config.columns} filterTable={this.filterTable}></CoreDataTable_SearchBar>
                         </Card>
                         : null
                     }
@@ -362,6 +368,7 @@ render() {
                         columns={this.props.config.columns}
                         dataSource={this.state.dataSource}
                         pagination={this.state.pagination}
+                        loading={this.state.loading}
                         selectedRowKeys={this.state.selectedRowKeys}
                         onSelectChange={this.onSelectChange}
                         handleTableChange={this.handleTableChange}

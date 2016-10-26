@@ -22,10 +22,10 @@ class CoreDataTable_SearchBar extends Component {
     };
     formSubmit(e) {
         e.preventDefault();
-        console.log('收到表单值：', this.props.form.getFieldsValue());
-        var filterItems = this.props.form.getFieldsValue();
+        // console.log('收到表单值：', this.props.form.getFieldsValue());
+        // var filterItems = this.props.form.getFieldsValue();
         // this.props.filterTable();
-        this.props.filterTable({}, filterItems, {});
+        this.props.filterTable();
     };
     resetSearch(e) {
         e.preventDefault();

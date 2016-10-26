@@ -9,14 +9,6 @@ class CoreDataTable_MainTable extends Component {
         this.state = {
             selectedRowKeys: [],  // 这里配置默认勾选列
             data: [],
-            // pagination: {
-            //     total:5,
-            //     showSizeChanger: true,
-            //     onShowSizeChange(current, pageSize) {
-            //         console.log('Current: ', current, '; PageSize: ', pageSize);
-            //     },
-            // },
-            loading: false,
         };
 
         // this.handleTableChange = this.handleTableChange.bind(this);
@@ -64,7 +56,7 @@ class CoreDataTable_MainTable extends Component {
                     dataSource={this.props.dataSource}
                     rowSelection={rowSelection}
                     pagination={this.props.pagination}
-                    loading={this.state.loading}
+                    loading={this.props.loading}
                     onChange={this.props.handleTableChange}
                     />
             </div>

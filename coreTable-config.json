@@ -4,7 +4,7 @@
     "title": "cool table generated ",
     "selectable": true,
     "singleSelect": false,
-	"pagination":false,
+    "pagination": true,
     "enableQuery": true,
     "showToolBar": true,
     "queryUrl": "http://localhost:7001/api/coretable",
@@ -22,131 +22,114 @@
     "hasChildTable": true,
     "childTableComponentName": "coreChildTable",
     "toolbar": {
-      "otherButtons": [
-        {
-          "name": "publish"
-        }
-      ]
+      "otherButtons": [{
+        "name": "publish"
+      }]
     },
-    "columns": [
-      {
-        "dataIndex": "NO",
-        "title": "编号",
-        "isKey": true,
-        "isLinkUrl": true,
-        "LinkUrl": "_self",
-        "isRefKey": false,
-        "hide": false,
-        "canQuery": true,
-        "canEdit": false,
-        "controlType": "number",
-        "controlBasicInfo": {}
-      },
-      {
-        "dataIndex": "NAME",
-        "title": "名称",
-        "isKey": false,
-        "isLinkUrl": false,
-        "isRefKey": false,
-        "hide": false,
-        "canQuery": true,
-        "canEdit": true,
-        "controlType": "text",
-        "controlBasicInfo": {}
-      },
-      {
-        "dataIndex": "StartTime",
-        "title": "开始时间",
-        "isKey": false,
-        "isLinkUrl": false,
-        "isRefKey": false,
-        "hide": false,
-        "canQuery": true,
-        "canEdit": true,
-        "controlType": "datepicker",
-        "controlBasicInfo": {}
-      },
-      {
-        "dataIndex": "TYPE",
-        "title": "类型",
-        "isKey": false,
-        "isLinkUrl": false,
-        "isRefKey": false,
-        "hide": false,
-        "canQuery": true,
-        "canEdit": true,
-        "controlType": "select",
-        "controlBasicInfo": {
-          "items": [
-            {
-              "value": "cool",
-              "name": "好",
-              "desc": "it's great"
-            },
-            {
-              "value": "notSoCool",
-              "name": "没那么好",
-              "desc": "it's not very great"
-            },
-            {
-              "value": "bad",
-              "name": "不好",
-              "desc": "it's bad"
-            }
-          ]
-        }
-      },
-      {
-        "dataIndex": "SEX",
-        "title": "性别",
-        "isKey": false,
-        "isLinkUrl": false,
-        "isRefKey": false,
-        "hide": false,
-        "canQuery": true,
-        "canEdit": true,
-        "controlType": "radio",
-        "controlBasicInfo": {
-          "items": [
-            {
-              "value": "man",
-              "name": "男",
-              "desc": "it's great"
-            },
-            {
-              "value": "feman",
-              "name": "女",
-              "desc": "it's not very great"
-            }
-          ]
-        }
-      },
-      {
-        "dataIndex": "STATUS",
-        "title": "状态",
-        "isKey": false,
-        "isLinkUrl": false,
-        "isRefKey": false,
-        "hide": false,
-        "canQuery": true,
-        "canEdit": true,
-        "controlType": "select",
-        "controlBasicInfo": {
-          "dataUrl": "http://localhost:3001/getAllStatus"
-        }
-      },
-      {
-        "dataIndex": "DESC",
-        "title": "备注",
-        "isKey": false,
-        "isLinkUrl": false,
-        "isRefKey": false,
-        "hide": false,
-        "canQuery": true,
-        "canEdit": true,
-        "controlType": "textarea",
-        "controlBasicInfo": {}
+    "columns": [{
+      "dataIndex": "NO",
+      "title": "编号",
+      "isKey": true,
+      "isLinkUrl": true,
+      "LinkUrl": "_self",
+      "isRefKey": false,
+      "hide": false,
+      "canQuery": true,
+      "canEdit": false,
+      "controlType": "number",
+      "controlBasicInfo": {}
+    }, {
+      "dataIndex": "NAME",
+      "title": "名称",
+      "isKey": false,
+      "isLinkUrl": false,
+      "isRefKey": false,
+      "hide": false,
+      "canQuery": true,
+      "canEdit": true,
+      "controlType": "text",
+      "controlBasicInfo": {}
+    }, {
+      "dataIndex": "StartTime",
+      "title": "开始时间",
+      "isKey": false,
+      "isLinkUrl": false,
+      "isRefKey": false,
+      "hide": false,
+      "canQuery": true,
+      "canEdit": true,
+      "controlType": "datepicker",
+      "controlBasicInfo": {}
+    }, {
+      "dataIndex": "TYPE",
+      "title": "类型",
+      "isKey": false,
+      "isLinkUrl": false,
+      "isRefKey": false,
+      "hide": false,
+      "canQuery": true,
+      "canEdit": true,
+      "controlType": "select",
+      "controlBasicInfo": {
+        "items": [{
+          "value": "cool",
+          "name": "好",
+          "desc": "it's great"
+        }, {
+          "value": "notSoCool",
+          "name": "没那么好",
+          "desc": "it's not very great"
+        }, {
+          "value": "bad",
+          "name": "不好",
+          "desc": "it's bad"
+        }]
       }
-    ]
+    }, {
+      "dataIndex": "SEX",
+      "title": "性别",
+      "isKey": false,
+      "isLinkUrl": false,
+      "isRefKey": false,
+      "hide": false,
+      "canQuery": true,
+      "canEdit": true,
+      "controlType": "radio",
+      "controlBasicInfo": {
+        "items": [{
+          "value": "man",
+          "name": "男",
+          "desc": "it's great"
+        }, {
+          "value": "feman",
+          "name": "女",
+          "desc": "it's not very great"
+        }]
+      }
+    }, {
+      "dataIndex": "STATUS",
+      "title": "状态",
+      "isKey": false,
+      "isLinkUrl": false,
+      "isRefKey": false,
+      "hide": false,
+      "canQuery": true,
+      "canEdit": true,
+      "controlType": "select",
+      "controlBasicInfo": {
+        "dataUrl": "http://localhost:3001/getAllStatus"
+      }
+    }, {
+      "dataIndex": "DESC",
+      "title": "备注",
+      "isKey": false,
+      "isLinkUrl": false,
+      "isRefKey": false,
+      "hide": false,
+      "canQuery": true,
+      "canEdit": true,
+      "controlType": "textarea",
+      "controlBasicInfo": {}
+    }]
   }
 }
