@@ -199,6 +199,15 @@ updateRow(rowData = {}) {
             next("not found the item need be update!");
             return;
         }
+
+    //     for (var i = 0; i < this.props.config.columns.length; i++) {
+    //     var column = this.props.config.columns[i];
+    //     if (column.controlType == "datepicker") {
+    //         selectEditRow[column.dataIndex] = moment(selectEditRow[column.dataIndex]);
+    //     }
+
+    // }
+
         _.assign(existedOne, rowData);
         this.setState({dataSource: this.state.dataSource});
 

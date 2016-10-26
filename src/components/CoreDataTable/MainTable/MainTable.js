@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Table, Input } from 'antd';
 import _ from 'lodash';
+import moment from 'moment';
 import reqwest from 'reqwest';
 
 class CoreDataTable_MainTable extends Component {
@@ -48,6 +49,15 @@ class CoreDataTable_MainTable extends Component {
         var columns = _.filter(this.props.columns, function (column) {
             return !column.hide;
         });
+
+/***********************时间格式的format******************** */
+        var datepickerColumns = _.filter(this.props.columns, { controlType: "datepicker" });
+        for (var i = 0; i < datepickerColumns.length; i++) {
+             var column = datepickerColumns[i];
+            column.render =(value, row, index)=> {
+                return moment(value).format(this.props.displayDateFormat||"YYYY/MM/DD");
+            }
+        }
 
         /**********************针对固定Option的情况。暂不支持Url加载Option****************** */
         var selectColumns = _.filter(this.props.columns, { controlType: "select" });
