@@ -70,6 +70,7 @@
       "canQuery": true,
       "canEdit": true,
       "controlType": "select",
+      "renderDataIndex":"TYPE_TEXT",
       "controlBasicInfo": {
         "items": [{
           "value": "cool",

@@ -80,6 +80,7 @@ class CoreDataTable extends Component {
         var pager=this.state.pagination;
         if (this.state.pagination) {           
             pager.current = pagination.current;
+            pager.pageSize=pagination.pageSize;
         }
 
         this.setState({
@@ -98,8 +99,8 @@ class CoreDataTable extends Component {
         var paginationSetting = {};
         if (this.state.pagination) {
             paginationSetting = {
-                pageSize: pagination.pageSize || 10,
-                page: pagination.current || 1
+                pageSize: pagination.pageSize ||this.state.pagination.pageSize|| 10,
+                page: pagination.current ||this.state.pagination.current|| 1
             };
         };
         this.fetch({
@@ -121,7 +122,7 @@ fetch(params = {}) {
         data: {
             ...params,
             },
-type: 'json',
+        type: 'json',
         })
         .then(result => {
     console.log("表数据", result);

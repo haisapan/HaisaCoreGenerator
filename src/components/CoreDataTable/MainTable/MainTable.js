@@ -49,6 +49,20 @@ class CoreDataTable_MainTable extends Component {
             return !column.hide;
         });
 
+        var selectColumns=_.filter(this.props.columns, {controlType: "select"});
+        // debugger;
+        for (var i = 0; i < selectColumns.length; i++) {
+            var column = selectColumns[i];
+            if(column.renderDataIndex){
+                column.render=<span>test</span>
+                column.render=function(value, row, index){//要闭包，否则会出问题
+                    console.log(row[this.renderDataIndex]);
+                    //  debugger;
+                    return <span>{row[this.renderDataIndex]}</span>;
+                }.bind(column);
+            }
+        }
+
         return (
             <div>
                 <Table columns={columns} bordered={true}

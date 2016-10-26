@@ -75,6 +75,7 @@
         "canQuery": true,
         "canEdit": false,
         "controlType": "select",
+        "renderDataIndex":"TYPE_TEXT",
         "controlBasicInfo": {
           "items": [
             {
