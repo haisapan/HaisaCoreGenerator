@@ -44,7 +44,7 @@ const App = React.createClass({
 
         return (<div>
             {/*<Link to="/login">login</Link>*/}
-            <CoreDataTable config={tableConfig.coreTable}></CoreDataTable>
+            <CoreDataTable config={tableConfig.coreTable} SearchBarExtension={null} ToolBarExtension={null}></CoreDataTable>
             {this.props.children}
         </div>
 

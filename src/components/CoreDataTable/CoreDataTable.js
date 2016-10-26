@@ -45,8 +45,10 @@ class CoreDataTable extends Component {
 
         /**设置state */
         this.state = {
-            pagination: !this.props.config.pagination ?false: {
+            pagination: !this.props.config.pagination ? false : {
                 total: 0,
+                current: 1,
+                pageSize: 10,
                 pageSizeOptions: ["5", "10", "20", "50", "100"],
                 showSizeChanger: true,
                 onShowSizeChange(current, pageSize) {
@@ -77,10 +79,10 @@ class CoreDataTable extends Component {
     };
 
     handleTableChange(pagination, filters, sorter) {
-        var pager=this.state.pagination;
-        if (this.state.pagination) {           
+        var pager = this.state.pagination;
+        if (this.state.pagination) {
             pager.current = pagination.current;
-            pager.pageSize=pagination.pageSize;
+            pager.pageSize = pagination.pageSize;
         }
 
         this.setState({
@@ -91,16 +93,16 @@ class CoreDataTable extends Component {
     };
 
     /**查询表格数据 */
-    filterTable(pagination = {}, filters={}, sorter = {}) {
+    filterTable(pagination = {}, filters = {}, sorter = {}) {
 
-        var filterItems=this.refs.coretable_searchbar.getFieldsValue();  //当前searchbar的查询条件
-        filters={...filters, ...filterItems};
+        var filterItems = this.refs.coretable_searchbar.getFieldsValue();  //当前searchbar的查询条件
+        filters = {...filters, ...filterItems };
 
         var paginationSetting = {};
         if (this.state.pagination) {
             paginationSetting = {
-                pageSize: pagination.pageSize ||this.state.pagination.pageSize|| 10,
-                page: pagination.current ||this.state.pagination.current|| 1
+                pageSize: pagination.pageSize || this.state.pagination.pageSize || 10,
+                page: pagination.current || this.state.pagination.current || 1
             };
         };
         this.fetch({
@@ -122,7 +124,7 @@ fetch(params = {}) {
         data: {
             ...params,
             },
-        type: 'json',
+type: 'json',
         })
         .then(result => {
     console.log("表数据", result);
@@ -159,7 +161,7 @@ addRow(rowData = {}) {
                 title: '提示',
                 content: '添加成功!',
             });
-            
+
             // this.setState({
             //     loading: false,
             //     dataSource: this.state.dataSource
@@ -189,6 +191,17 @@ updateRow(rowData = {}) {
                 title: '提示',
                 content: '更新成功',
             });
+
+             var existedOne = _.find(this.state.dataSource, function (item) {
+            return item.NO == rowData.NO;
+        });
+        if (!existedOne) {
+            next("not found the item need be update!");
+            return;
+        }
+        _.assign(existedOne, rowData);
+        this.setState({dataSource: this.state.dataSource});
+
         })
         .fail((err) => {
             Modal.error({
@@ -301,7 +314,7 @@ deleteItem(){
                 title: '提示',
                 content: '删除成功',
             });
-            
+
         })
         .fail((err) => {
             debugger;
@@ -388,10 +401,10 @@ render() {
         </div>
     );
 }
-}
+};
 
 CoreDataTable.propTypes = {
-
+    config: React.PropTypes.any.isRequired
 };
 
 export default CoreDataTable;

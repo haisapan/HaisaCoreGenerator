@@ -38,27 +38,40 @@ class CoreDataTable_MainTable extends Component {
 
     render() {
         // console.log(this.props);
-        
-        const rowSelection = this.props.selectable?{
+
+        const rowSelection = this.props.selectable ? {
             selectedRowKeys: this.props.selectedRowKeys,
             onChange: this.props.onSelectChange,
         }
-        :null;
+            : null;
 
-        var columns=_.filter(this.props.columns, function(column){
+        var columns = _.filter(this.props.columns, function (column) {
             return !column.hide;
         });
 
-        var selectColumns=_.filter(this.props.columns, {controlType: "select"});
-        // debugger;
+        /**********************针对固定Option的情况。暂不支持Url加载Option****************** */
+        var selectColumns = _.filter(this.props.columns, { controlType: "select" });
         for (var i = 0; i < selectColumns.length; i++) {
             var column = selectColumns[i];
-            if(column.renderDataIndex){
-                column.render=<span>test</span>
-                column.render=function(value, row, index){//要闭包，否则会出问题
-                    console.log(row[this.renderDataIndex]);
-                    //  debugger;
-                    return <span>{row[this.renderDataIndex]}</span>;
+            // TODO 考虑使用if(column.renderDataIndex){
+            if (column.controlBasicInfo && column.controlBasicInfo.items) {
+                column.render = function (value, row, index) {//要闭包，否则会出问题  //TODO 或许可以直接用column.controlBaseInfo
+                    // return <span>{row[this.renderDataIndex]}</span>;
+                    var columnInfo = _.find(this.controlBasicInfo.items, { value: value });
+                    return columnInfo.name;
+                }.bind(column);
+            }
+        }
+
+        var radioColumns = _.filter(this.props.columns, { controlType: "radio" });
+        for (var i = 0; i < radioColumns.length; i++) {
+            var column = radioColumns[i];
+            // TODO 考虑使用if(column.renderDataIndex){
+            if (column.controlBasicInfo && column.controlBasicInfo.items) {
+                column.render = function (value, row, index) {//要闭包，否则会出问题  //TODO 或许可以直接用column.controlBaseInfo
+                    // return <span>{row[this.renderDataIndex]}</span>;
+                    var columnInfo = _.find(this.controlBasicInfo.items, { value: value });
+                    return columnInfo.name;
                 }.bind(column);
             }
         }
