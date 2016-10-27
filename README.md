@@ -9,6 +9,9 @@ editWay: 参数： inline, modal
 
 
 ***********************
+同时考虑Tree等的增删改查。同质化
+
+***************************
 Maybe a UI to generate the db.json later
 
 
