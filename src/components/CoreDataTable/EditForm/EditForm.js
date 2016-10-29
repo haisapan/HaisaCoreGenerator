@@ -3,7 +3,7 @@ import { Form, Input, Radio, Checkbox, Button, Tooltip, Icon } from 'antd';
 const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
 
-import ControlGenerator from '../../Controls/ControlGenerator';
+import ControlGenerator from '../Controls/ControlGenerator';
 
 class EditForm extends Component {
     constructor(props){

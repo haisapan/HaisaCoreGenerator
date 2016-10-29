@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Form, Input, Row, Col, Button, DatePicker } from 'antd';
 
 
-import ControlGenerator from '../../Controls/ControlGenerator';
+import ControlGenerator from '../Controls/ControlGenerator';
 
 // const FormItem = Form.Item;
 
